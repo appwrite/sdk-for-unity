@@ -1,0 +1,17 @@
+```csharp
+using Appwrite;
+using Appwrite.Enums;
+using Appwrite.Models;
+using Appwrite.Services;
+
+Client client = Client.From(
+    projectId: "<YOUR_PROJECT_ID>",
+    endpoint: "https://<REGION>.cloud.appwrite.io/v1");
+
+Account account = new Account(client);
+
+User result = await account.UpdateMfaAuthenticator(
+    type: AuthenticatorType.Totp,
+    otp: "<OTP>"
+);
+```

@@ -1,0 +1,24 @@
+{
+  "name": "io.appwrite.unity",
+  "version": "0.1.0",
+  "displayName": "Appwrite SDK",
+  "description": "Appwrite backend as a service cuts up to 70% of the time and costs required for building a modern application. We abstract and simplify common development tasks behind a REST APIs, to help you develop your app in a fast and secure way. For full API documentation and tutorials go to [https://appwrite.io/docs](https://appwrite.io/docs)",
+  "unity": "2021.3",
+  "documentationUrl": "https://appwrite.io",
+  "keywords": [
+    "appwrite",
+    "backend",
+    "baas",
+    "api",
+    "database",
+    "authentication",
+    "storage",
+    "functions"
+  ],
+  "samples": [
+  {
+      "displayName": "Example",
+      "description": "Appwrite Example",
+      "path": "Samples~/AppwriteExample"
+  } ]
+}

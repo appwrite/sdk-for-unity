@@ -1,0 +1,44 @@
+
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Appwrite.Enums;
+using Appwrite.Extensions;
+
+namespace Appwrite.Models
+{
+    public class DocumentList
+    {
+        [JsonPropertyName("total")]
+        public long Total { get; private set; }
+
+        [JsonPropertyName("documents")]
+        public List<Document> Documents { get; private set; }
+
+        public DocumentList(
+            long total,
+            List<Document> documents
+        )
+        {
+            Total = total;
+            Documents = documents;
+        }
+
+        public static DocumentList From(Dictionary<string, object> map) => new DocumentList(
+            total: Convert.ToInt64(map["total"]),
+            documents: map["documents"].ConvertToList<Dictionary<string, object>>().Select(it => Appwrite.Models.Document.From(map: it)).ToList()
+        );
+
+        public Dictionary<string, object?> ToMap() => new Dictionary<string, object?>()
+        {
+            { "total", Total },
+            { "documents", Documents?.Select(it => it.ToMap()).ToList() }
+        };
+
+        public T ConvertTo<T>(Func<Dictionary<string, object>, T> fromJson) =>
+            (T)Documents.Select(it => it.ConvertTo(fromJson));
+
+    }
+}

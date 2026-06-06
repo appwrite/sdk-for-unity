@@ -21,7 +21,7 @@ Appwrite is an open-source backend as a service server that abstracts and simpli
 3. Enter the following URL:
 
 ```sh
-https://github.com/appwrite/sdk-for-unity.git?path=Assets
+https://github.com/appwrite/sdk-for-unity.git
 ```
 
 4. Click **Add**.

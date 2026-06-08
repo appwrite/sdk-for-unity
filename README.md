@@ -21,12 +21,12 @@ Appwrite is an open-source backend as a service server that abstracts and simpli
 3. Enter the following URL:
 
 ```sh
-https://github.com/appwrite/sdk-for-unity.git#0.2.1
+https://github.com/appwrite/sdk-for-unity.git#0.3.0
 ```
 
 4. Click **Add**.
 
-The `#0.2.1` suffix pins the package to a specific release. Change it to any released tag, or omit `#0.2.1` to track the latest commit on the default branch.
+The `#0.3.0` suffix pins the package to a specific release. Change it to any released tag, or omit `#0.3.0` to track the latest commit on the default branch.
 
 ### Manual Installation
 

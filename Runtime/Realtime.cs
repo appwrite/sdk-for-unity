@@ -523,17 +523,24 @@ namespace Appwrite
             {
                 var uri = PrepareUri();
                 Debug.Log($"[Realtime] Connecting to URI: {uri}");
-                
+
+                var headers = new Dictionary<string, string>();
+                var jwt = _client.Config.GetValueOrDefault("jwt");
+                if (!string.IsNullOrEmpty(jwt))
+                {
+                    headers["x-appwrite-jwt"] = jwt;
+                }
+
                 if (_webSocket == null || _webSocket.State == WebSocketState.Closed)
                 {
-                    _webSocket = new WebSocket(uri);
+                    _webSocket = new WebSocket(uri, headers);
                     _lastUrl = uri;
                     SetupWebSocketEvents();
                 }
                 else if (_lastUrl != uri && _webSocket.State != WebSocketState.Closed)
                 {
                     await CloseConnection();
-                    _webSocket = new WebSocket(uri);
+                    _webSocket = new WebSocket(uri, headers);
                     _lastUrl = uri;
                     SetupWebSocketEvents();
                 }

@@ -10,7 +10,7 @@ Client client = Client.From(
 Account account = new Account(client);
 
 User result = await account.UpdatePassword(
-    password: "",
-    oldPassword: "<OLD_PASSWORD>" // optional
+    password: "password",
+    oldPassword: "password" // optional
 );
 ```

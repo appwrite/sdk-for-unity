@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.4.0
+
+* Added: Realtime connections now send an `x-appwrite-jwt` header for authentication.
+* Fixed: URL-encode path parameters in `databases` requests.
+
 ## 0.3.0
 
 * Added: `userAccessedAt` field to the `Membership` model.

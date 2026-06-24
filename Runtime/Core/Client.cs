@@ -72,11 +72,11 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent" , $"AppwriteUnitySDK/0.3.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent" , $"AppwriteUnitySDK/0.4.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.3.0"},
+                { "x-sdk-version", "0.4.0"},
                 { "X-Appwrite-Response-Format", "1.9.5" }
             };
 
@@ -221,20 +221,20 @@ namespace Appwrite
         }
 #if UNI_TASK
         /// <summary>
-        /// Sends a "ping" request to Appwrite to verify connectivity.
+        /// Send a ping to project as part of onboarding.
         /// </summary>
-        /// <returns>Ping response as string</returns>
+        /// <returns>Response as string</returns>
         public async UniTask<string> Ping()
         {
             var headers = new Dictionary<string, string>
             {
-                ["content-type"] = "application/json",
-                ["X-Appwrite-Project"] = _config.GetValueOrDefault("project", "")
+                ["X-Appwrite-Project"] = _config.GetValueOrDefault("project", ""),
+                ["accept"] = "application/json",
             };
 
             var parameters = new Dictionary<string, object?>();
 
-            return await Call<string>("GET", "/ping", headers, parameters, 
+            return await Call<string>("GET", "/ping", headers, parameters,
                 response => (response.TryGetValue("result", out var result) ? result?.ToString() : null) ?? string.Empty);
         }
 #endif

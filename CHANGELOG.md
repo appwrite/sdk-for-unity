@@ -3,7 +3,7 @@
 ## 0.4.0
 
 * Added: Realtime connections now send an `x-appwrite-jwt` header for authentication.
-* Fixed: URL-encode path parameters in `databases` requests.
+* Deprecated: `databases` transaction methods in favor of `TablesDB`.
 
 ## 0.3.0
 

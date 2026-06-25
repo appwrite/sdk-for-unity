@@ -18,6 +18,7 @@ namespace Appwrite.Services
         /// List transactions across all databases.
         /// </para>
         /// </summary>
+        [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.listTransactions` instead.")]
         public UniTask<Models.TransactionList> ListTransactions(List<string>? queries = null)
         {
             var apiPath = "/databases/transactions";
@@ -51,6 +52,7 @@ namespace Appwrite.Services
         /// Create a new transaction.
         /// </para>
         /// </summary>
+        [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.createTransaction` instead.")]
         public UniTask<Models.Transaction> CreateTransaction(long? ttl = null)
         {
             var apiPath = "/databases/transactions";
@@ -85,6 +87,7 @@ namespace Appwrite.Services
         /// Get a transaction by its unique ID.
         /// </para>
         /// </summary>
+        [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.getTransaction` instead.")]
         public UniTask<Models.Transaction> GetTransaction(string transactionId)
         {
             var apiPath = "/databases/transactions/{transactionId}"
@@ -118,6 +121,7 @@ namespace Appwrite.Services
         /// Update a transaction, to either commit or roll back its operations.
         /// </para>
         /// </summary>
+        [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.updateTransaction` instead.")]
         public UniTask<Models.Transaction> UpdateTransaction(string transactionId, bool? commit = null, bool? rollback = null)
         {
             var apiPath = "/databases/transactions/{transactionId}"
@@ -154,6 +158,7 @@ namespace Appwrite.Services
         /// Delete a transaction by its unique ID.
         /// </para>
         /// </summary>
+        [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.deleteTransaction` instead.")]
         public UniTask<object> DeleteTransaction(string transactionId)
         {
             var apiPath = "/databases/transactions/{transactionId}"
@@ -184,6 +189,7 @@ namespace Appwrite.Services
         /// Create multiple operations in a single transaction.
         /// </para>
         /// </summary>
+        [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.createOperations` instead.")]
         public UniTask<Models.Transaction> CreateOperations(string transactionId, List<object>? operations = null)
         {
             var apiPath = "/databases/transactions/{transactionId}/operations"

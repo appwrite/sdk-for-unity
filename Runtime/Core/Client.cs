@@ -158,17 +158,17 @@ namespace Appwrite
 
             if (!string.IsNullOrEmpty(userId))
             {
-                client.SetHeader("impersonateUserId", "X-Appwrite-Impersonate-User-Id", userId);
+                client.SetHeader("impersonateuserid", "X-Appwrite-Impersonate-User-Id", userId);
             }
 
             if (!string.IsNullOrEmpty(userEmail))
             {
-                client.SetHeader("impersonateUserEmail", "X-Appwrite-Impersonate-User-Email", userEmail);
+                client.SetHeader("impersonateuseremail", "X-Appwrite-Impersonate-User-Email", userEmail);
             }
 
             if (!string.IsNullOrEmpty(userPhone))
             {
-                client.SetHeader("impersonateUserPhone", "X-Appwrite-Impersonate-User-Phone", userPhone);
+                client.SetHeader("impersonateuserphone", "X-Appwrite-Impersonate-User-Phone", userPhone);
             }
 
             return client;
@@ -302,7 +302,8 @@ namespace Appwrite
         /// <returns>Client instance for method chaining</returns>
         public Client SetBearer(string value)
         {
-            SetHeader("bearer", "Authorization", value);
+            _config["bearer"] = value;
+            _headers["Authorization"] = "Bearer " + value;
             return this;
         }
 

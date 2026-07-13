@@ -72,11 +72,11 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent" , $"AppwriteUnitySDK/0.4.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent" , $"AppwriteUnitySDK/0.5.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.4.0"},
+                { "x-sdk-version", "0.5.0"},
                 { "X-Appwrite-Response-Format", "1.9.5" }
             };
 
@@ -107,7 +107,7 @@ namespace Appwrite
             bool selfSigned = false)
         {
             var client = From(projectId, endpoint, endpointRealtime, locale, selfSigned);
-            client.SetHeader("session", "X-Appwrite-Session", session, persist: true);
+            client.SetHeader("session", "X-Appwrite-Session", session);
             return client;
         }
 
@@ -238,12 +238,12 @@ namespace Appwrite
                 response => (response.TryGetValue("result", out var result) ? result?.ToString() : null) ?? string.Empty);
         }
 #endif
-        private void SetHeader(string configKey, string header, string value, bool persist = false)
+        private void SetHeader(string configKey, string header, string value)
         {
             _config[configKey] = value;
             _headers[header] = value;
 
-            if (persist)
+            if (header == "X-Appwrite-Session" || header == "X-Appwrite-JWT")
             {
                 SaveSession();
             }
@@ -268,14 +268,130 @@ namespace Appwrite
         }
 
         /// <summary>
-        /// Set the current JWT and persist it for future requests
+        /// Set Project
+        ///
+        /// Your project ID
         /// </summary>
-        /// <param name="jwt">JWT token returned by Account.CreateJWT()</param>
+        /// <param name="value">The value to set</param>
         /// <returns>Client instance for method chaining</returns>
-        public Client SetJWT(string jwt)
+        public Client SetProject(string value)
         {
-            SetHeader("jwt", "X-Appwrite-JWT", jwt, persist: true);
-            _config.Remove("jWT");
+            SetHeader("project", "X-Appwrite-Project", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set JWT
+        ///
+        /// Your secret JSON Web Token
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetJWT(string value)
+        {
+            SetHeader("jwt", "X-Appwrite-JWT", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Bearer
+        ///
+        /// The OAuth access token to authenticate with
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetBearer(string value)
+        {
+            SetHeader("bearer", "Authorization", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Locale
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetLocale(string value)
+        {
+            SetHeader("locale", "X-Appwrite-Locale", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Session
+        ///
+        /// The user session to authenticate with
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetSession(string value)
+        {
+            SetHeader("session", "X-Appwrite-Session", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set DevKey
+        ///
+        /// Your secret dev API key
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetDevKey(string value)
+        {
+            SetHeader("devkey", "X-Appwrite-Dev-Key", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Cookie
+        ///
+        /// The user cookie to authenticate with. Used by SDKs that forward an incoming Cookie header in server-side runtimes.
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetCookie(string value)
+        {
+            SetHeader("cookie", "Cookie", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set ImpersonateUserId
+        ///
+        /// Impersonate a user by ID
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetImpersonateUserId(string value)
+        {
+            SetHeader("impersonateuserid", "X-Appwrite-Impersonate-User-Id", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set ImpersonateUserEmail
+        ///
+        /// Impersonate a user by email
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetImpersonateUserEmail(string value)
+        {
+            SetHeader("impersonateuseremail", "X-Appwrite-Impersonate-User-Email", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set ImpersonateUserPhone
+        ///
+        /// Impersonate a user by phone
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetImpersonateUserPhone(string value)
+        {
+            SetHeader("impersonateuserphone", "X-Appwrite-Impersonate-User-Phone", value);
             return this;
         }
 

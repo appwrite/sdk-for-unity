@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.5.0
+
+* Added: `Client` header setters `SetProject`, `SetBearer`, `SetLocale`, `SetSession`, `SetDevKey`, `SetCookie`
+* Added: `Client` impersonation setters `SetImpersonateUserId`, `SetImpersonateUserEmail`, `SetImpersonateUserPhone`
+* Added: `Query.VectorDot`, `Query.VectorCosine`, `Query.VectorEuclidean` vector search queries
+* Added: `Appwrite` value to `OAuthProvider` enum
+* Added: geolocation and connection fields (`City`, `TimeZone`, `Latitude`, `Isp`, etc.) to `Locale` model
+
 ## 0.4.0
 
 * Added: Realtime connections now send an `x-appwrite-jwt` header for authentication.

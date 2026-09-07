@@ -20,7 +20,7 @@ namespace Appwrite
     {
         private const string SESSION_PREF = "Appwrite_Session";
         private const string JWT_PREF = "Appwrite_JWT";
-    
+
         public string Endpoint => _endpoint;
         public Dictionary<string, string> Config => _config;
         public CookieContainer CookieContainer => _cookieContainer;
@@ -72,12 +72,12 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent" , $"AppwriteUnitySDK/0.5.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.6.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.5.0"},
-                { "X-Appwrite-Response-Format", "1.9.5" }
+                { "x-sdk-version", "0.6.0"},
+                { "X-Appwrite-Response-Format", "2.0.0" }
             };
 
             _config = new Dictionary<string, string>();
@@ -197,7 +197,8 @@ namespace Appwrite
 
         private void ConfigureEndpoint(string endpoint)
         {
-            if (!endpoint.StartsWith("http://") && !endpoint.StartsWith("https://")) {
+            if (!endpoint.StartsWith("http://") && !endpoint.StartsWith("https://"))
+            {
                 throw new AppwriteException("Invalid endpoint URL: " + endpoint);
             }
 
@@ -206,7 +207,8 @@ namespace Appwrite
 
         private static string ValidateRealtimeEndpoint(string endpointRealtime)
         {
-            if (!endpointRealtime.StartsWith("ws://") && !endpointRealtime.StartsWith("wss://")) {
+            if (!endpointRealtime.StartsWith("ws://") && !endpointRealtime.StartsWith("wss://"))
+            {
                 throw new AppwriteException("Invalid realtime endpoint URL: " + endpointRealtime);
             }
 
@@ -427,10 +429,13 @@ namespace Appwrite
         /// </summary>
         private void LoadSession()
         {
-            try {
+            try
+            {
                 LoadPref(SESSION_PREF, "session", "X-Appwrite-Session");
                 LoadPref(JWT_PREF, "jwt", "X-Appwrite-JWT");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Debug.LogWarning($"Failed to load session: {ex.Message}");
             }
         }
@@ -449,21 +454,26 @@ namespace Appwrite
         /// </summary>
         private void SaveSession()
         {
-            try {
+            try
+            {
                 SavePref("session", SESSION_PREF);
                 SavePref("jwt", JWT_PREF);
                 PlayerPrefs.Save();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Debug.LogWarning($"Failed to save session: {ex.Message}");
             }
         }
 
         private void SavePref(string configKey, string prefKey)
         {
-            if (_config.ContainsKey(configKey)) {
+            if (_config.ContainsKey(configKey))
+            {
                 PlayerPrefs.SetString(prefKey, _config[configKey]);
             }
-            else {
+            else
+            {
                 PlayerPrefs.DeleteKey(prefKey);
             }
         }
@@ -473,12 +483,15 @@ namespace Appwrite
         /// </summary>
         public void DeleteSessionStorage()
         {
-            try {
+            try
+            {
                 PlayerPrefs.DeleteKey(SESSION_PREF);
                 PlayerPrefs.DeleteKey(JWT_PREF);
                 PlayerPrefs.Save();
                 _cookieContainer.DeleteCookieStorage();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Debug.LogWarning($"Failed to delete session storage: {ex.Message}");
             }
         }
@@ -494,8 +507,8 @@ namespace Appwrite
                 ? (path.Contains("?") ? "&" : "?") + parameters.ToQueryString()
                 : string.Empty;
             var url = _endpoint + path + queryString;
-            
-            var isMultipart = headers.TryGetValue("Content-Type", out var contentType) && 
+
+            var isMultipart = headers.TryGetValue("Content-Type", out var contentType) &&
                               "multipart/form-data".Equals(contentType, StringComparison.OrdinalIgnoreCase);
 
             UnityWebRequest request;
@@ -626,7 +639,7 @@ namespace Appwrite
             request.redirectLimit = 0; // Disable auto-redirect
 
             var operation = request.SendWebRequest();
-            
+
             while (!operation.isDone)
             {
                 await UniTask.Yield();
@@ -808,16 +821,16 @@ namespace Appwrite
         {
             if (string.IsNullOrEmpty(paramName))
                 throw new ArgumentException("Parameter name cannot be null or empty", nameof(paramName));
-                
+
             if (!parameters.ContainsKey(paramName))
                 throw new ArgumentException($"Parameter {paramName} not found", nameof(paramName));
-                
+
             var input = parameters[paramName] as InputFile;
             if (input == null)
                 throw new ArgumentException($"Parameter {paramName} must be an InputFile", nameof(paramName));
-                
+
             var size = 0L;
-            switch(input.SourceType)
+            switch (input.SourceType)
             {
                 case "path":
                     var info = new FileInfo(input.Path);
@@ -838,7 +851,7 @@ namespace Appwrite
                         throw new InvalidOperationException("Byte array data is null");
                     size = bytes.Length;
                     break;
-            };
+            }
 
             try
             {
@@ -848,7 +861,7 @@ namespace Appwrite
 
                 if (size < ChunkSize)
                 {
-                    switch(input.SourceType)
+                    switch (input.SourceType)
                     {
                         case "path":
                         case "stream":
@@ -873,12 +886,12 @@ namespace Appwrite
                     };
 
                     var multipartParameters = new Dictionary<string, object?>(parameters);
-                    multipartParameters[paramName] = new InputFile 
-                    { 
-                        Data = buffer, 
-                        Filename = input.Filename, 
-                        MimeType = input.MimeType, 
-                        SourceType = "bytes" 
+                    multipartParameters[paramName] = new InputFile
+                    {
+                        Data = buffer,
+                        Filename = input.Filename,
+                        MimeType = input.MimeType,
+                        SourceType = "bytes"
                     };
 
                     return await Call(
@@ -916,7 +929,7 @@ namespace Appwrite
                 {
                     byte[] chunkData;
 
-                    switch(input.SourceType)
+                    switch (input.SourceType)
                     {
                         case "path":
                         case "stream":
@@ -955,12 +968,12 @@ namespace Appwrite
                     };
 
                     var chunkParameters = new Dictionary<string, object?>(parameters);
-                    chunkParameters[paramName] = new InputFile 
-                    { 
+                    chunkParameters[paramName] = new InputFile
+                    {
                         Data = chunkData,
-                        Filename = input.Filename, 
-                        MimeType = input.MimeType, 
-                        SourceType = "bytes" 
+                        Filename = input.Filename,
+                        MimeType = input.MimeType,
+                        SourceType = "bytes"
                     };
 
                     result = await Call<Dictionary<string, object?>>(
@@ -996,7 +1009,7 @@ namespace Appwrite
                 // Convert to non-nullable dictionary for converter
                 var nonNullableResult = result.Where(kvp => kvp.Value != null)
                     .ToDictionary(kvp => kvp.Key, kvp => kvp.Value!);
-                
+
                 return converter(nonNullableResult);
             }
             finally

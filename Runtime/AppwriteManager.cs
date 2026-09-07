@@ -129,14 +129,17 @@ namespace Appwrite
             { typeof(Appwrite.Services.Account), (AppwriteService.Account, client => new Appwrite.Services.Account(client)) },
             { typeof(Appwrite.Services.Avatars), (AppwriteService.Avatars, client => new Appwrite.Services.Avatars(client)) },
             { typeof(Appwrite.Services.Databases), (AppwriteService.Databases, client => new Appwrite.Services.Databases(client)) },
+            { typeof(Appwrite.Services.DocumentsDB), (AppwriteService.DocumentsDB, client => new Appwrite.Services.DocumentsDB(client)) },
             { typeof(Appwrite.Services.Functions), (AppwriteService.Functions, client => new Appwrite.Services.Functions(client)) },
             { typeof(Appwrite.Services.Graphql), (AppwriteService.Graphql, client => new Appwrite.Services.Graphql(client)) },
             { typeof(Appwrite.Services.Locale), (AppwriteService.Locale, client => new Appwrite.Services.Locale(client)) },
             { typeof(Appwrite.Services.Messaging), (AppwriteService.Messaging, client => new Appwrite.Services.Messaging(client)) },
+            { typeof(Appwrite.Services.Organization), (AppwriteService.Organization, client => new Appwrite.Services.Organization(client)) },
             { typeof(Appwrite.Services.Presences), (AppwriteService.Presences, client => new Appwrite.Services.Presences(client)) },
             { typeof(Appwrite.Services.Storage), (AppwriteService.Storage, client => new Appwrite.Services.Storage(client)) },
             { typeof(Appwrite.Services.TablesDB), (AppwriteService.TablesDB, client => new Appwrite.Services.TablesDB(client)) },
             { typeof(Appwrite.Services.Teams), (AppwriteService.Teams, client => new Appwrite.Services.Teams(client)) },
+            { typeof(Appwrite.Services.VectorsDB), (AppwriteService.VectorsDB, client => new Appwrite.Services.VectorsDB(client)) },
         };
         
         /// <summary>

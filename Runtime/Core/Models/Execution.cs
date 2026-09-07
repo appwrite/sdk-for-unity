@@ -23,17 +23,20 @@ namespace Appwrite.Models
         [JsonPropertyName("$permissions")]
         public List<string> Permissions { get; private set; }
 
-        [JsonPropertyName("functionId")]
-        public string FunctionId { get; private set; }
+        [JsonPropertyName("resourceId")]
+        public string ResourceId { get; private set; }
+
+        [JsonPropertyName("resourceType")]
+        public Appwrite.Enums.ExecutionResourceType ResourceType { get; private set; }
 
         [JsonPropertyName("deploymentId")]
         public string DeploymentId { get; private set; }
 
         [JsonPropertyName("trigger")]
-        public ExecutionTrigger Trigger { get; private set; }
+        public Appwrite.Enums.ExecutionTrigger Trigger { get; private set; }
 
         [JsonPropertyName("status")]
-        public ExecutionStatus Status { get; private set; }
+        public Appwrite.Enums.ExecutionStatus Status { get; private set; }
 
         [JsonPropertyName("requestMethod")]
         public string RequestMethod { get; private set; }
@@ -70,10 +73,11 @@ namespace Appwrite.Models
             string createdAt,
             string updatedAt,
             List<string> permissions,
-            string functionId,
+            string resourceId,
+            Appwrite.Enums.ExecutionResourceType resourceType,
             string deploymentId,
-            ExecutionTrigger trigger,
-            ExecutionStatus status,
+            Appwrite.Enums.ExecutionTrigger trigger,
+            Appwrite.Enums.ExecutionStatus status,
             string requestMethod,
             string requestPath,
             List<Headers> requestHeaders,
@@ -90,7 +94,8 @@ namespace Appwrite.Models
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             Permissions = permissions;
-            FunctionId = functionId;
+            ResourceId = resourceId;
+            ResourceType = resourceType;
             DeploymentId = deploymentId;
             Trigger = trigger;
             Status = status;
@@ -111,10 +116,11 @@ namespace Appwrite.Models
             createdAt: map["$createdAt"].ToString(),
             updatedAt: map["$updatedAt"].ToString(),
             permissions: map["$permissions"].ConvertToList<string>(),
-            functionId: map["functionId"].ToString(),
+            resourceId: map["resourceId"].ToString(),
+            resourceType: new Appwrite.Enums.ExecutionResourceType(map["resourceType"].ToString()!),
             deploymentId: map["deploymentId"].ToString(),
-            trigger: new ExecutionTrigger(map["trigger"].ToString()!),
-            status: new ExecutionStatus(map["status"].ToString()!),
+            trigger: new Appwrite.Enums.ExecutionTrigger(map["trigger"].ToString()!),
+            status: new Appwrite.Enums.ExecutionStatus(map["status"].ToString()!),
             requestMethod: map["requestMethod"].ToString(),
             requestPath: map["requestPath"].ToString(),
             requestHeaders: map["requestHeaders"].ConvertToList<Dictionary<string, object>>().Select(it => Appwrite.Models.Headers.From(map: it)).ToList(),
@@ -133,7 +139,8 @@ namespace Appwrite.Models
             { "$createdAt", CreatedAt },
             { "$updatedAt", UpdatedAt },
             { "$permissions", Permissions },
-            { "functionId", FunctionId },
+            { "resourceId", ResourceId },
+            { "resourceType", ResourceType.Value },
             { "deploymentId", DeploymentId },
             { "trigger", Trigger.Value },
             { "status", Status.Value },

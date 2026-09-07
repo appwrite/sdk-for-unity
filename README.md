@@ -1,13 +1,13 @@
 # Appwrite Unity SDK
 
 ![License](https://img.shields.io/github/license/appwrite/sdk-for-unity.svg?style=flat-square)
-![Version](https://img.shields.io/badge/api%20version-1.9.5-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/api%20version-2.0.0-blue.svg?style=flat-square)
 ![Unity](https://img.shields.io/badge/Unity-2021.3%2B-blue.svg?style=flat-square)
 [![Build Status](https://img.shields.io/travis/com/appwrite/sdk-for-unity?style=flat-square)](https://travis-ci.com/appwrite/sdk-for-unity)
 [![Twitter Account](https://img.shields.io/twitter/follow/appwrite?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
 
-**This SDK is compatible with Appwrite server version 1.9.x. For older versions, please check [previous releases](https://github.com/appwrite/sdk-for-unity/releases).**
+**This SDK targets Appwrite server version 1.9.x as shipped on Appwrite Cloud.** Self-hosted releases can lag behind Cloud — if you run an older self-hosted build, use a matching older SDK from [previous releases](https://github.com/appwrite/sdk-for-unity/releases) when APIs differ.
 
 Appwrite is an open-source backend as a service server that abstracts and simplifies complex and repetitive development tasks behind a very simple to use REST API. Appwrite aims to help you develop your apps faster and in a more secure way. Use the Unity SDK to integrate your app with the Appwrite server to easily start interacting with all of Appwrite backend APIs and tools. For full API documentation and tutorials go to [https://appwrite.io/docs](https://appwrite.io/docs)
 
@@ -21,12 +21,12 @@ Appwrite is an open-source backend as a service server that abstracts and simpli
 3. Enter the following URL:
 
 ```sh
-https://github.com/appwrite/sdk-for-unity.git#0.5.0
+https://github.com/appwrite/sdk-for-unity.git#0.6.0
 ```
 
 4. Click **Add**.
 
-The `#0.5.0` suffix pins the package to a specific release. Change it to any released tag, or omit `#0.5.0` to track the latest commit on the default branch.
+The `#0.6.0` suffix pins the package to a specific release. Change it to any released tag, or omit `#0.6.0` to track the latest commit on the default branch.
 
 ### Manual Installation
 

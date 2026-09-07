@@ -11,26 +11,25 @@ namespace Samples.AppwriteExample
     {
         [Header("Configuration")]
         [SerializeField] private AppwriteConfig config;
-        
+
         private AppwriteManager _manager;
-        
+
         private async void Start()
-        
         {
             // Method 1: Using AppwriteManager (Recommended)
             await ExampleWithManager();
-            
+
             // Method 2: Using Client directly
             await ExampleWithDirectClient();
         }
-        
+
         /// <summary>
         /// Example using AppwriteManager for easy setup
         /// </summary>
         private async UniTask ExampleWithManager()
         {
             Debug.Log("=== Example with AppwriteManager ===");
-            
+
             // Get or create manager
             _manager = AppwriteManager.Instance;
             if (_manager == null)
@@ -39,7 +38,7 @@ namespace Samples.AppwriteExample
                 _manager = managerGo.AddComponent<AppwriteManager>();
                 _manager.SetConfig(config);
             }
-            
+
             // Initialize
             var success = await _manager.Initialize(true);
             if (!success)
@@ -47,7 +46,7 @@ namespace Samples.AppwriteExample
                 Debug.LogError("Failed to initialize AppwriteManager");
                 return;
             }
-            
+
             // Use services through manager
             try
             {
@@ -55,11 +54,11 @@ namespace Samples.AppwriteExample
                 var client = _manager.Client;
                 var pingResult = await client.Ping();
                 Debug.Log($"Ping result: {pingResult}");
-                
+
                 // Service creation through DI container
                 // var account = _manager.GetService<Account>();
                 // var databases = _manager.GetService<Databases>();
-                
+
                 // Realtime example
                 var realtime = _manager.Realtime;
                 var subscription = realtime.Subscribe(
@@ -73,7 +72,7 @@ namespace Samples.AppwriteExample
                         Debug.Log($"Realtime event: {eventName}");
                     }
                 );
-                
+
                 Debug.Log("AppwriteManager example completed successfully");
             }
             catch (System.Exception ex)
@@ -81,14 +80,14 @@ namespace Samples.AppwriteExample
                 Debug.LogError($"AppwriteManager example failed: {ex.Message}");
             }
         }
-        
+
         /// <summary>
         /// Example using Client directly
         /// </summary>
         private async UniTask ExampleWithDirectClient()
         {
             Debug.Log("=== Example with Direct Client ===");
-            
+
             try
             {
                 // Create and configure client

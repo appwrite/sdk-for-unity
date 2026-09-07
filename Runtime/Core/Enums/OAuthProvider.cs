@@ -20,6 +20,7 @@ namespace Appwrite.Enums
         public static OAuthProvider Bitbucket => new OAuthProvider("bitbucket");
         public static OAuthProvider Bitly => new OAuthProvider("bitly");
         public static OAuthProvider Box => new OAuthProvider("box");
+        public static OAuthProvider Cloudflare => new OAuthProvider("cloudflare");
         public static OAuthProvider Dailymotion => new OAuthProvider("dailymotion");
         public static OAuthProvider Discord => new OAuthProvider("discord");
         public static OAuthProvider Disqus => new OAuthProvider("disqus");
@@ -31,6 +32,7 @@ namespace Appwrite.Enums
         public static OAuthProvider Github => new OAuthProvider("github");
         public static OAuthProvider Gitlab => new OAuthProvider("gitlab");
         public static OAuthProvider Google => new OAuthProvider("google");
+        public static OAuthProvider Huggingface => new OAuthProvider("huggingface");
         public static OAuthProvider Keycloak => new OAuthProvider("keycloak");
         public static OAuthProvider Kick => new OAuthProvider("kick");
         public static OAuthProvider Linkedin => new OAuthProvider("linkedin");
@@ -41,6 +43,7 @@ namespace Appwrite.Enums
         public static OAuthProvider Paypal => new OAuthProvider("paypal");
         public static OAuthProvider PaypalSandbox => new OAuthProvider("paypalSandbox");
         public static OAuthProvider Podio => new OAuthProvider("podio");
+        public static OAuthProvider Resend => new OAuthProvider("resend");
         public static OAuthProvider Salesforce => new OAuthProvider("salesforce");
         public static OAuthProvider Slack => new OAuthProvider("slack");
         public static OAuthProvider Spotify => new OAuthProvider("spotify");

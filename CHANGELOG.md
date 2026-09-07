@@ -1,5 +1,22 @@
 # Change Log
 
+## 0.6.0
+
+* Breaking: `Execution.FunctionId` replaced by `ResourceId` and `ResourceType` (`ExecutionResourceType`)
+* Breaking: `Storage.CreateFile` gains `folder` parameter before `onProgress`; positional callers must update
+* Breaking: `AppwriteService` flag values shifted by new `DocumentsDB`, `Organization`, `VectorsDB` bits; re-save custom `AppwriteConfig` assets
+* Breaking: SDK now targets Appwrite 2.0 (`X-Appwrite-Response-Format: 2.0.0`)
+* Added: `DocumentsDB` and `VectorsDB` services for document and vector database access
+* Added: `Organization` service with `ListInstallations`, `CreateInstallation`, `GetInstallation`, `UpdateInstallation`, `DeleteInstallation`
+* Added: `Teams` installation methods `ListInstallations`, `CreateInstallation`, `GetInstallation`, `UpdateInstallation`, `DeleteInstallation`
+* Added: `Account` consent methods `ListConsents`, `GetConsent`, `DeleteConsent`, `ListConsentTokens`, `GetConsentToken`, `DeleteConsentToken`
+* Added: `Avatars.GetPhoto` returning the best available user profile photo
+* Added: `Folder` parameter to `Storage.CreateFile` and `Folder`, `Key` fields on `File`
+* Added: `AppInstallation`, `Oauth2Consent`, `Oauth2ConsentToken` models and their list models
+* Added: `Custom` value to `AuthenticationFactor` enum and `MfaFactors.Custom` field
+* Added: `Cloudflare`, `Huggingface`, `Resend` values to `OAuthProvider` enum
+* Updated: `Presence.Metadata` and `User.HashOptions` expose raw objects instead of strings
+
 ## 0.5.0
 
 * Added: `Client` header setters `SetProject`, `SetBearer`, `SetLocale`, `SetSession`, `SetDevKey`, `SetCookie`

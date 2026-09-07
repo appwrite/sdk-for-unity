@@ -10,7 +10,7 @@ namespace Appwrite.Utilities
     /// </summary>
     public static class AppwriteUtilities
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         /// <summary>
         /// Quick setup for Appwrite in Unity (Editor Only)
         /// </summary>
@@ -18,7 +18,7 @@ namespace Appwrite.Utilities
         {
             // Create configuration
             var config = AppwriteConfig.CreateConfiguration();
-            
+
 
             // Create manager
             var managerGO = new GameObject("AppwriteManager");
@@ -33,10 +33,10 @@ namespace Appwrite.Utilities
                 throw new InvalidOperationException("Failed to initialize AppwriteManager");
             }
             //Create Realtime instance
-            var a =manager.Realtime;
+            var a = manager.Realtime;
             return manager;
         }
-        #endif
+#endif
 
         /// <summary>
         /// Run async operation with Unity-safe error handling

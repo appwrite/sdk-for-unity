@@ -12,8 +12,8 @@ using NativeWebSocket;
 
 namespace Appwrite
 {
-    #region Realtime Data Models
-    
+#region Realtime Data Models
+
     // Base class to identify a message type
     internal class RealtimeMessageBase
     {
@@ -45,7 +45,7 @@ namespace Appwrite
         [JsonPropertyName("subscriptions")]
         public Dictionary<string, string> Subscriptions { get; set; }
     }
-    
+
     internal class RealtimeAuthData
     {
         [JsonPropertyName("session")]
@@ -79,7 +79,7 @@ namespace Appwrite
         [JsonPropertyName("metadata")]
         public Dictionary<string, object> Metadata { get; set; }
     }
-    
+
     /// <summary>
     /// Realtime response event structure
     /// </summary>
@@ -97,8 +97,8 @@ namespace Appwrite
         [JsonPropertyName("payload")]
         public T Payload { get; set; }
     }
-    
-    #endregion
+
+#endregion
 
     /// <summary>
     /// Realtime subscription for Unity
@@ -159,7 +159,7 @@ namespace Appwrite
             _client = client;
             _lastSession = _client.GetSession();
         }
-        
+
         /// <summary>
         /// Update the client reference (used when client is reinitialized)
         /// </summary>
@@ -167,7 +167,7 @@ namespace Appwrite
         {
             _client = client;
             var newSession = _client.GetSession();
-            
+
             // If session changed and we're connected, re-authenticate
             if (_lastSession != newSession && IsConnected)
             {
@@ -175,7 +175,7 @@ namespace Appwrite
                 SendFallbackAuthentication().Forget();
             }
         }
-        
+
         /// <summary>
         /// Notify realtime that session has changed and re-authentication may be needed
         /// </summary>
@@ -194,9 +194,9 @@ namespace Appwrite
             // DispatchMessageQueue ensures that WebSocket messages are processed on the main thread.
             // This is crucial for Unity API calls (e.g., modifying GameObjects, UI) from within WebSocket events.
             // Note: This ties message processing to the game's frame rate and Time.timeScale. If the game is paused (Time.timeScale = 0), message processing will also pause.
-            #if !UNITY_WEBGL || UNITY_EDITOR
+#if !UNITY_WEBGL || UNITY_EDITOR
                 _webSocket?.DispatchMessageQueue();
-            #endif
+#endif
         }
 
         /// <summary>
@@ -504,7 +504,7 @@ namespace Appwrite
         {
             return SendPendingMessages();
         }
-        
+
         private async UniTask CreateSocket()
         {
             if (_creatingSocket)
@@ -516,7 +516,7 @@ namespace Appwrite
             if (_channels.Count == 0 && _pendingPresence == null) return;
 
             _creatingSocket = true;
-            
+
             Debug.Log($"[Realtime] Creating socket for {_channels.Count} channels");
 
             try
@@ -649,7 +649,7 @@ namespace Appwrite
         private async UniTask SendFallbackAuthentication()
         {
             var session = _client.Config.GetValueOrDefault("session");
-            
+
             if (!string.IsNullOrEmpty(session))
             {
                 var authMessage = new RealtimeMessage<RealtimeAuthData>
@@ -739,7 +739,7 @@ namespace Appwrite
             StopHeartbeat();
             _heartbeatTokenSource = new CancellationTokenSource();
             var heartbeatToken = _heartbeatTokenSource.Token;
-            
+
             UniTask.Create(async () =>
             {
                 try
@@ -747,7 +747,7 @@ namespace Appwrite
                     while (!heartbeatToken.IsCancellationRequested && _webSocket?.State == WebSocketState.Open)
                     {
                         await UniTask.Delay(TimeSpan.FromSeconds(20), cancellationToken: heartbeatToken);
-                        
+
                         if (_webSocket?.State == WebSocketState.Open && !heartbeatToken.IsCancellationRequested)
                         {
                             var pingMessage = new { type = "ping" };
@@ -780,12 +780,12 @@ namespace Appwrite
         private void Retry()
         {
             if (!_reconnect) return;
-            
+
             _reconnectAttempts++;
             var timeout = GetTimeout();
-            
+
             Debug.Log($"[Realtime] Reconnecting in {timeout} seconds.");
-            
+
             // Ensure we have a cancellation token source
             if (_cancellationTokenSource == null || _cancellationTokenSource.IsCancellationRequested)
             {
@@ -793,22 +793,22 @@ namespace Appwrite
                 _cancellationTokenSource = new CancellationTokenSource();
                 oldTokenSource?.Dispose();
             }
-            
+
             var token = _cancellationTokenSource.Token;
-            
+
             UniTask.Create(async () =>
             {
                 try
                 {
                     await UniTask.Delay(TimeSpan.FromSeconds(timeout), cancellationToken: token);
-                    
+
                     // Re-check _reconnect after delay in case disconnect was called during wait
                     if (!_reconnect || token.IsCancellationRequested)
                     {
                         Debug.Log("[Realtime] Retry cancelled - reconnect disabled");
                         return;
                     }
-                    
+
                     await CreateSocket();
                 }
                 catch (OperationCanceledException)
@@ -843,14 +843,14 @@ namespace Appwrite
             {
                 $"project={Uri.EscapeDataString(project)}"
             };
-            
-            var uri = new Uri(realtimeEndpoint); 
-            
+
+            var uri = new Uri(realtimeEndpoint);
+
             var basePath = uri.AbsolutePath.TrimEnd('/');
             var realtimePath = basePath.EndsWith("/realtime", StringComparison.OrdinalIgnoreCase)
                 ? basePath
                 : basePath + "/realtime";
-                        
+
             var baseUrl = $"{uri.Scheme}://{uri.Host}";
             if ((uri.Scheme == "wss" && uri.Port != 443) || (uri.Scheme == "ws" && uri.Port != 80))
             {
@@ -865,7 +865,7 @@ namespace Appwrite
             var previousReconnect = _reconnect;
             _reconnect = false;
             StopHeartbeat();
-            
+
             // Cancel any pending retry operations
             var tokenSource = _cancellationTokenSource;
             _cancellationTokenSource = null;
@@ -874,7 +874,7 @@ namespace Appwrite
                 tokenSource.Cancel();
                 tokenSource.Dispose();
             }
-            
+
             if (_webSocket != null)
             {
                 try
@@ -892,9 +892,9 @@ namespace Appwrite
                     _lastUrl = null;
                 }
             }
-            
+
             _reconnectAttempts = 0;
-            
+
             // Restore reconnect flag if we want to allow future reconnects
             if (allowReconnect)
             {
@@ -909,7 +909,7 @@ namespace Appwrite
             // Disconnect permanently - don't allow auto-reconnect
             await CloseConnection(allowReconnect: false);
         }
-        
+
         /// <summary>
         /// Reconnect after a manual disconnect
         /// </summary>
@@ -917,7 +917,7 @@ namespace Appwrite
         {
             _reconnect = true;
         }
-        
+
         private void OnDestroy()
         {
             Disconnect().Forget();

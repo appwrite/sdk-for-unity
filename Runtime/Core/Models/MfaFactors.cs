@@ -23,24 +23,30 @@ namespace Appwrite.Models
         [JsonPropertyName("recoveryCode")]
         public bool RecoveryCode { get; private set; }
 
+        [JsonPropertyName("custom")]
+        public bool Custom { get; private set; }
+
         public MfaFactors(
             bool totp,
             bool phone,
             bool email,
-            bool recoveryCode
+            bool recoveryCode,
+            bool custom
         )
         {
             Totp = totp;
             Phone = phone;
             Email = email;
             RecoveryCode = recoveryCode;
+            Custom = custom;
         }
 
         public static MfaFactors From(Dictionary<string, object> map) => new MfaFactors(
             totp: (bool)map["totp"],
             phone: (bool)map["phone"],
             email: (bool)map["email"],
-            recoveryCode: (bool)map["recoveryCode"]
+            recoveryCode: (bool)map["recoveryCode"],
+            custom: (bool)map["custom"]
         );
 
         public Dictionary<string, object?> ToMap() => new Dictionary<string, object?>()
@@ -48,7 +54,8 @@ namespace Appwrite.Models
             { "totp", Totp },
             { "phone", Phone },
             { "email", Email },
-            { "recoveryCode", RecoveryCode }
+            { "recoveryCode", RecoveryCode },
+            { "custom", Custom }
         };
     }
 }

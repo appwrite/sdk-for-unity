@@ -15,14 +15,14 @@ byte[] result = await storage.GetFilePreview(
     fileId: "<FILE_ID>",
     width: 0, // optional
     height: 0, // optional
-    gravity: ImageGravity.Center, // optional
+    gravity: ImageGravity.Auto, // optional
     quality: -1, // optional
     borderWidth: 0, // optional
-    borderColor: "", // optional
+    borderColor: "FFFFFF", // optional
     borderRadius: 0, // optional
     opacity: 0, // optional
     rotation: -360, // optional
-    background: "", // optional
+    background: "FFFFFF", // optional
     output: ImageFormat.Jpg, // optional
     token: "<TOKEN>" // optional
 );

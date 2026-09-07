@@ -263,6 +263,57 @@ namespace Appwrite.Services
 
         /// <summary>
         /// <para>
+        /// Returns the best available profile photo for a user. The endpoint tries
+        /// each source in priority order and returns the first successful result:
+        /// OAuth2 identity photo, Gravatar, Libravatar, Appwrite Initials, built-in
+        /// static fallback.
+        /// 
+        /// Passing `userId` — `current()` for the authenticated user — resolves
+        /// the photo from everything known about that user: identity photos, email,
+        /// and name. An explicit `emailHash` or `name` then overrides just that value,
+        /// and the user's remaining sources stay in the chain. Without `userId`,
+        /// passing `emailHash` and/or `name` resolves the avatar from those values
+        /// alone: the hash is looked up on Gravatar and Libravatar, the name is
+        /// rendered as initials, and the session user stays out of the chain so their
+        /// own photo never shadows the avatar being asked for. When nothing is passed,
+        /// the photo resolves for the currently authenticated user. Emails are only
+        /// ever accepted pre-hashed, so no address ends up in a URL.
+        /// </para>
+        /// </summary>
+        public UniTask<byte[]> GetPhoto(long? width = null, long? height = null, long? quality = null, string? output = null, string? rating = null, string? userId = null, string? emailHash = null, string? name = null)
+        {
+            var apiPath = "/avatars/photo";
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "width", width },
+                { "height", height },
+                { "quality", quality },
+                { "output", output },
+                { "rating", rating },
+                { "userId", userId },
+                { "emailHash", emailHash },
+                { "name", name }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "accept", "image/*" }
+            };
+
+
+
+            return _client.Call<byte[]>(
+                method: "GET",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!);
+
+        }
+
+        /// <summary>
+        /// <para>
         /// Converts a given plain text to a QR code image. You can use the query
         /// parameters to change the size and style of the resulting image.
         /// 

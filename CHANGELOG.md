@@ -15,6 +15,7 @@
 * Added: `AppInstallation`, `Oauth2Consent`, `Oauth2ConsentToken` models and their list models
 * Added: `Custom` value to `AuthenticationFactor` enum and `MfaFactors.Custom` field
 * Added: `Cloudflare`, `Huggingface`, `Resend` values to `OAuthProvider` enum
+* Added: `Auto` value to `ImageGravity` enum
 * Updated: `Presence.Metadata` and `User.HashOptions` expose raw objects instead of strings
 
 ## 0.5.0

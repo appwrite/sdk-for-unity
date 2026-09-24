@@ -21,6 +21,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.ExecutionList> ListExecutions(string functionId, List<string>? queries = null, bool? total = null)
         {
+            if (functionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"functionId\"");
+            }
+
             var apiPath = "/functions/{functionId}/executions"
                 .Replace("{functionId}", functionId);
 
@@ -59,6 +64,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Execution> CreateExecution(string functionId, string? body = null, bool? @async = null, string? @path = null, Appwrite.Enums.ExecutionMethod? method = null, object? headers = null, string? scheduledAt = null)
         {
+            if (functionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"functionId\"");
+            }
+
             var apiPath = "/functions/{functionId}/executions"
                 .Replace("{functionId}", functionId);
 
@@ -99,6 +109,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Execution> GetExecution(string functionId, string executionId)
         {
+            if (functionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"functionId\"");
+            }
+
+            if (executionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"executionId\"");
+            }
+
             var apiPath = "/functions/{functionId}/executions/{executionId}"
                 .Replace("{functionId}", functionId)
                 .Replace("{executionId}", executionId);

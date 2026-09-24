@@ -93,6 +93,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.AppInstallation> GetInstallation(string installationId)
         {
+            if (installationId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"installationId\"");
+            }
+
             var apiPath = "/organization/installations/{installationId}"
                 .Replace("{installationId}", installationId);
 
@@ -129,6 +134,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.AppInstallation> UpdateInstallation(string installationId, string? authorizationDetails = null)
         {
+            if (installationId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"installationId\"");
+            }
+
             var apiPath = "/organization/installations/{installationId}"
                 .Replace("{installationId}", installationId);
 
@@ -166,6 +176,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> DeleteInstallation(string installationId)
         {
+            if (installationId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"installationId\"");
+            }
+
             var apiPath = "/organization/installations/{installationId}"
                 .Replace("{installationId}", installationId);
 

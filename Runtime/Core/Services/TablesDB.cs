@@ -87,6 +87,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Transaction> GetTransaction(string transactionId)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/tablesdb/transactions/{transactionId}"
                 .Replace("{transactionId}", transactionId);
 
@@ -120,6 +125,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Transaction> UpdateTransaction(string transactionId, bool? commit = null, bool? rollback = null)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/tablesdb/transactions/{transactionId}"
                 .Replace("{transactionId}", transactionId);
 
@@ -156,6 +166,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> DeleteTransaction(string transactionId)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/tablesdb/transactions/{transactionId}"
                 .Replace("{transactionId}", transactionId);
 
@@ -166,7 +181,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 
@@ -186,6 +202,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Transaction> CreateOperations(string transactionId, List<object>? operations = null)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/tablesdb/transactions/{transactionId}/operations"
                 .Replace("{transactionId}", transactionId);
 
@@ -222,6 +243,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.RowList> ListRows(string databaseId, string tableId, List<string>? queries = null, string? transactionId = null, bool? total = null, long? ttl = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId);
@@ -263,6 +294,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Row> CreateRow(string databaseId, string tableId, string rowId, object data, List<string>? permissions = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId);
@@ -303,6 +344,21 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Row> GetRow(string databaseId, string tableId, string rowId, List<string>? queries = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
+            if (rowId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"rowId\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId)
@@ -343,6 +399,21 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Row> UpsertRow(string databaseId, string tableId, string rowId, object? data = null, List<string>? permissions = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
+            if (rowId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"rowId\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId)
@@ -383,6 +454,21 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Row> UpdateRow(string databaseId, string tableId, string rowId, object? data = null, List<string>? permissions = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
+            if (rowId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"rowId\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId)
@@ -422,6 +508,21 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> DeleteRow(string databaseId, string tableId, string rowId, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
+            if (rowId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"rowId\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId)
@@ -435,7 +536,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 
@@ -455,6 +557,26 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Row> DecrementRowColumn(string databaseId, string tableId, string rowId, string column, double? @value = null, double? min = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
+            if (rowId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"rowId\"");
+            }
+
+            if (column == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"column\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/decrement"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId)
@@ -495,6 +617,26 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Row> IncrementRowColumn(string databaseId, string tableId, string rowId, string column, double? @value = null, double? max = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
+            if (rowId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"rowId\"");
+            }
+
+            if (column == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"column\"");
+            }
+
             var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/increment"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{tableId}", tableId)

@@ -9,8 +9,8 @@ Client client = Client.From(
 
 Account account = new Account(client);
 
-LogList result = await account.ListLogs(
-    queries: new List<string>(), // optional
-    total: false // optional
+Token result = await account.CreateRecoveryOTP(
+    email: "email@example.com",
+    phrase: false // optional
 );
 ```

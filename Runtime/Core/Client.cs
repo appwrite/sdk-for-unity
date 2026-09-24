@@ -72,12 +72,12 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent", $"AppwriteUnitySDK/0.6.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.7.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.6.0"},
-                { "X-Appwrite-Response-Format", "2.0.0" }
+                { "x-sdk-version", "0.7.0"},
+                { "X-Appwrite-Response-Format", "2.3.0" }
             };
 
             _config = new Dictionary<string, string>();
@@ -121,19 +121,6 @@ namespace Appwrite
         {
             var client = From(projectId, endpoint, endpointRealtime, locale, selfSigned);
             client.SetJWT(jwt);
-            return client;
-        }
-
-        public static Client FromDevKey(
-            string projectId,
-            string devKey,
-            string endpoint = "https://cloud.appwrite.io/v1",
-            string? endpointRealtime = null,
-            string? locale = null,
-            bool selfSigned = false)
-        {
-            var client = From(projectId, endpoint, endpointRealtime, locale, selfSigned);
-            client.SetHeader("devKey", "X-Appwrite-Dev-Key", devKey);
             return client;
         }
 
@@ -330,19 +317,6 @@ namespace Appwrite
         public Client SetSession(string value)
         {
             SetHeader("session", "X-Appwrite-Session", value);
-            return this;
-        }
-
-        /// <summary>
-        /// Set DevKey
-        ///
-        /// Your secret dev API key
-        /// </summary>
-        /// <param name="value">The value to set</param>
-        /// <returns>Client instance for method chaining</returns>
-        public Client SetDevKey(string value)
-        {
-            SetHeader("devkey", "X-Appwrite-Dev-Key", value);
             return this;
         }
 

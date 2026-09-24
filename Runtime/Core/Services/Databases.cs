@@ -90,6 +90,11 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.getTransaction` instead.")]
         public UniTask<Models.Transaction> GetTransaction(string transactionId)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/databases/transactions/{transactionId}"
                 .Replace("{transactionId}", transactionId);
 
@@ -124,6 +129,11 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.updateTransaction` instead.")]
         public UniTask<Models.Transaction> UpdateTransaction(string transactionId, bool? commit = null, bool? rollback = null)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/databases/transactions/{transactionId}"
                 .Replace("{transactionId}", transactionId);
 
@@ -161,6 +171,11 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.deleteTransaction` instead.")]
         public UniTask<object> DeleteTransaction(string transactionId)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/databases/transactions/{transactionId}"
                 .Replace("{transactionId}", transactionId);
 
@@ -171,7 +186,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 
@@ -192,6 +208,11 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.createOperations` instead.")]
         public UniTask<Models.Transaction> CreateOperations(string transactionId, List<object>? operations = null)
         {
+            if (transactionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"transactionId\"");
+            }
+
             var apiPath = "/databases/transactions/{transactionId}/operations"
                 .Replace("{transactionId}", transactionId);
 
@@ -229,6 +250,16 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.listRows` instead.")]
         public UniTask<Models.DocumentList> ListDocuments(string databaseId, string collectionId, List<string>? queries = null, string? transactionId = null, bool? total = null, long? ttl = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId);
@@ -271,6 +302,16 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.createRow` instead.")]
         public UniTask<Models.Document> CreateDocument(string databaseId, string collectionId, string documentId, object data, List<string>? permissions = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId);
@@ -312,6 +353,21 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.getRow` instead.")]
         public UniTask<Models.Document> GetDocument(string databaseId, string collectionId, string documentId, List<string>? queries = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            if (documentId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"documentId\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId)
@@ -353,6 +409,21 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRow` instead.")]
         public UniTask<Models.Document> UpsertDocument(string databaseId, string collectionId, string documentId, object? data = null, List<string>? permissions = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            if (documentId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"documentId\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId)
@@ -394,6 +465,21 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.updateRow` instead.")]
         public UniTask<Models.Document> UpdateDocument(string databaseId, string collectionId, string documentId, object? data = null, List<string>? permissions = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            if (documentId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"documentId\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId)
@@ -434,6 +520,21 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.deleteRow` instead.")]
         public UniTask<object> DeleteDocument(string databaseId, string collectionId, string documentId, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            if (documentId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"documentId\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId)
@@ -447,7 +548,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 
@@ -468,6 +570,26 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.decrementRowColumn` instead.")]
         public UniTask<Models.Document> DecrementDocumentAttribute(string databaseId, string collectionId, string documentId, string attribute, double? @value = null, double? min = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            if (documentId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"documentId\"");
+            }
+
+            if (attribute == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"attribute\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}/{attribute}/decrement"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId)
@@ -509,6 +631,26 @@ namespace Appwrite.Services
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.incrementRowColumn` instead.")]
         public UniTask<Models.Document> IncrementDocumentAttribute(string databaseId, string collectionId, string documentId, string attribute, double? @value = null, double? max = null, string? transactionId = null)
         {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            if (documentId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"documentId\"");
+            }
+
+            if (attribute == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"attribute\"");
+            }
+
             var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}/{attribute}/increment"
                 .Replace("{databaseId}", databaseId)
                 .Replace("{collectionId}", collectionId)

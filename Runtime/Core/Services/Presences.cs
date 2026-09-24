@@ -58,6 +58,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Presence> Get(string presenceId)
         {
+            if (presenceId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"presenceId\"");
+            }
+
             var apiPath = "/presences/{presenceId}"
                 .Replace("{presenceId}", presenceId);
 
@@ -92,6 +97,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Presence> Upsert(string presenceId, string status, List<string>? permissions = null, string? expiresAt = null, object? metadata = null)
         {
+            if (presenceId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"presenceId\"");
+            }
+
             var apiPath = "/presences/{presenceId}"
                 .Replace("{presenceId}", presenceId);
 
@@ -132,6 +142,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Presence> Update(string presenceId, string? status = null, string? expiresAt = null, object? metadata = null, List<string>? permissions = null, bool? purge = null)
         {
+            if (presenceId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"presenceId\"");
+            }
+
             var apiPath = "/presences/{presenceId}"
                 .Replace("{presenceId}", presenceId);
 
@@ -172,6 +187,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> Delete(string presenceId)
         {
+            if (presenceId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"presenceId\"");
+            }
+
             var apiPath = "/presences/{presenceId}"
                 .Replace("{presenceId}", presenceId);
 
@@ -182,7 +202,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 

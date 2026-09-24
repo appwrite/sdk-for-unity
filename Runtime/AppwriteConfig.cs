@@ -52,9 +52,6 @@ namespace Appwrite
         [SerializeField] private AppwriteService servicesToInitialize = AppwriteService.All;
 
         [Header("Advanced Settings")]
-        [Tooltip("Dev key (optional). Dev keys allow bypassing rate limits and CORS errors in your development environment. WARNING: Storing dev keys in ScriptableObjects is a security risk. Do not expose this in public repositories. Consider loading from a secure location at runtime for production builds.")]
-        [SerializeField] private string devKey = "";
-
         [Tooltip("Automatically connect to Appwrite on start")]
         [SerializeField] private bool autoConnect;
 
@@ -62,7 +59,6 @@ namespace Appwrite
         public string RealtimeEndpoint => realtimeEndpoint;
         public bool SelfSigned => selfSigned;
         public string ProjectId => projectId;
-        public string DevKey => devKey;
         public bool AutoConnect => autoConnect;
         public AppwriteService ServicesToInitialize => servicesToInitialize;
 
@@ -76,9 +72,6 @@ namespace Appwrite
 
             if (string.IsNullOrEmpty(projectId))
                 Debug.LogWarning("AppwriteConfig: Project ID is required");
-
-            if (!string.IsNullOrEmpty(devKey))
-                Debug.LogWarning("AppwriteConfig: Dev Key is set. For security, avoid storing keys directly in assets for production builds.");
         }
 
 
@@ -87,18 +80,11 @@ namespace Appwrite
         /// </summary>
         public Client CreateClient()
         {
-            return string.IsNullOrEmpty(devKey)
-                ? Client.From(
-                    projectId: projectId,
-                    endpoint: endpoint,
-                    endpointRealtime: string.IsNullOrEmpty(realtimeEndpoint) ? null : realtimeEndpoint,
-                    selfSigned: selfSigned)
-                : Client.FromDevKey(
-                    projectId: projectId,
-                    devKey: devKey,
-                    endpoint: endpoint,
-                    endpointRealtime: string.IsNullOrEmpty(realtimeEndpoint) ? null : realtimeEndpoint,
-                    selfSigned: selfSigned);
+            return Client.From(
+                projectId: projectId,
+                endpoint: endpoint,
+                endpointRealtime: string.IsNullOrEmpty(realtimeEndpoint) ? null : realtimeEndpoint,
+                selfSigned: selfSigned);
         }
 
 #if UNITY_EDITOR

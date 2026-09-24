@@ -94,6 +94,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Team> Get(string teamId)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}"
                 .Replace("{teamId}", teamId);
 
@@ -127,6 +132,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Team> UpdateName(string teamId, string name)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}"
                 .Replace("{teamId}", teamId);
 
@@ -163,6 +173,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> Delete(string teamId)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}"
                 .Replace("{teamId}", teamId);
 
@@ -173,7 +188,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 
@@ -193,6 +209,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.AppInstallationList> ListInstallations(string teamId, List<string>? queries = null, bool? total = null)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}/installations"
                 .Replace("{teamId}", teamId);
 
@@ -231,6 +252,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.AppInstallation> CreateInstallation(string teamId, string appId, string? authorizationDetails = null)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}/installations"
                 .Replace("{teamId}", teamId);
 
@@ -268,6 +294,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.AppInstallation> GetInstallation(string teamId, string installationId)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
+            if (installationId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"installationId\"");
+            }
+
             var apiPath = "/teams/{teamId}/installations/{installationId}"
                 .Replace("{teamId}", teamId)
                 .Replace("{installationId}", installationId);
@@ -305,6 +341,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.AppInstallation> UpdateInstallation(string teamId, string installationId, string? authorizationDetails = null)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
+            if (installationId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"installationId\"");
+            }
+
             var apiPath = "/teams/{teamId}/installations/{installationId}"
                 .Replace("{teamId}", teamId)
                 .Replace("{installationId}", installationId);
@@ -343,6 +389,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> DeleteInstallation(string teamId, string installationId)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
+            if (installationId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"installationId\"");
+            }
+
             var apiPath = "/teams/{teamId}/installations/{installationId}"
                 .Replace("{teamId}", teamId)
                 .Replace("{installationId}", installationId);
@@ -377,6 +433,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.MembershipList> ListMemberships(string teamId, List<string>? queries = null, string? search = null, bool? total = null)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}/memberships"
                 .Replace("{teamId}", teamId);
 
@@ -433,6 +494,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Membership> CreateMembership(string teamId, List<string> roles, string? email = null, string? userId = null, string? phone = null, string? url = null, string? name = null)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}/memberships"
                 .Replace("{teamId}", teamId);
 
@@ -475,6 +541,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Membership> GetMembership(string teamId, string membershipId)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
+            if (membershipId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"membershipId\"");
+            }
+
             var apiPath = "/teams/{teamId}/memberships/{membershipId}"
                 .Replace("{teamId}", teamId)
                 .Replace("{membershipId}", membershipId);
@@ -512,6 +588,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Membership> UpdateMembership(string teamId, string membershipId, List<string> roles)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
+            if (membershipId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"membershipId\"");
+            }
+
             var apiPath = "/teams/{teamId}/memberships/{membershipId}"
                 .Replace("{teamId}", teamId)
                 .Replace("{membershipId}", membershipId);
@@ -550,6 +636,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> DeleteMembership(string teamId, string membershipId)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
+            if (membershipId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"membershipId\"");
+            }
+
             var apiPath = "/teams/{teamId}/memberships/{membershipId}"
                 .Replace("{teamId}", teamId)
                 .Replace("{membershipId}", membershipId);
@@ -561,7 +657,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 
@@ -587,6 +684,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Membership> UpdateMembershipStatus(string teamId, string membershipId, string userId, string secret)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
+            if (membershipId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"membershipId\"");
+            }
+
             var apiPath = "/teams/{teamId}/memberships/{membershipId}/status"
                 .Replace("{teamId}", teamId)
                 .Replace("{membershipId}", membershipId);
@@ -626,6 +733,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Preferences> GetPrefs(string teamId)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}/prefs"
                 .Replace("{teamId}", teamId);
 
@@ -661,6 +773,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Preferences> UpdatePrefs(string teamId, object prefs)
         {
+            if (teamId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"teamId\"");
+            }
+
             var apiPath = "/teams/{teamId}/prefs"
                 .Replace("{teamId}", teamId);
 

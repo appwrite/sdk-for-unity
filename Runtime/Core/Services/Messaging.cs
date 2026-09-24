@@ -20,6 +20,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.Subscriber> CreateSubscriber(string topicId, string subscriberId, string targetId)
         {
+            if (topicId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"topicId\"");
+            }
+
             var apiPath = "/messaging/topics/{topicId}/subscribers"
                 .Replace("{topicId}", topicId);
 
@@ -56,6 +61,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> DeleteSubscriber(string topicId, string subscriberId)
         {
+            if (topicId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"topicId\"");
+            }
+
+            if (subscriberId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"subscriberId\"");
+            }
+
             var apiPath = "/messaging/topics/{topicId}/subscribers/{subscriberId}"
                 .Replace("{topicId}", topicId)
                 .Replace("{subscriberId}", subscriberId);
@@ -67,7 +82,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 

@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.7.0
+
+* Breaking: removed `Account.ListLogs` and the `Log`, `LogList` models
+* Breaking: removed `Client.SetDevKey`, `Client.FromDevKey` and the `AppwriteConfig` dev key field
+* Breaking: SDK now targets Appwrite 2.3 (`X-Appwrite-Response-Format: 2.3.0`)
+* Added: `Account.CreateIdTokenSession` for native Apple and Google sign-in with `IdTokenProvider` enum
+* Added: `Account.CreateRecoveryOTP` and `Account.UpdateRecoveryOTP` for code-based password recovery
+* Added: `Account.CreateEmailVerificationOTP` and `Account.UpdateEmailVerificationOTP`
+* Added: `Kakao` and `Tiktok` values to `OAuthProvider`
+* Added: `PasswordPwned` field on `User` and `ProviderIdToken` field on `Identity`
+* Fixed: empty-string required path parameters are rejected instead of sent to the API
+
 ## 0.6.0
 
 * Breaking: `Execution.FunctionId` replaced by `ResourceId` and `ResourceType` (`ExecutionResourceType`)

@@ -21,6 +21,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.FileList> ListFiles(string bucketId, List<string>? queries = null, string? search = null, bool? total = null)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files"
                 .Replace("{bucketId}", bucketId);
 
@@ -74,6 +79,11 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.File> CreateFile(string bucketId, string fileId, InputFile file, List<string>? permissions = null, string? folder = null, Action<UploadProgress>? onProgress = null)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files"
                 .Replace("{bucketId}", bucketId);
 
@@ -118,6 +128,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.File> GetFile(string bucketId, string fileId)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
+            if (fileId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"fileId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
                 .Replace("{bucketId}", bucketId)
                 .Replace("{fileId}", fileId);
@@ -153,6 +173,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<Models.File> UpdateFile(string bucketId, string fileId, string? name = null, List<string>? permissions = null)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
+            if (fileId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"fileId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
                 .Replace("{bucketId}", bucketId)
                 .Replace("{fileId}", fileId);
@@ -191,6 +221,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<object> DeleteFile(string bucketId, string fileId)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
+            if (fileId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"fileId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
                 .Replace("{bucketId}", bucketId)
                 .Replace("{fileId}", fileId);
@@ -202,7 +242,8 @@ namespace Appwrite.Services
             var apiHeaders = new Dictionary<string, string>()
             {
                 { "X-Appwrite-Project", _client.GetConfig("project") },
-                { "content-type", "application/json" }
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
             };
 
 
@@ -224,6 +265,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<byte[]> GetFileDownload(string bucketId, string fileId, string? token = null)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
+            if (fileId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"fileId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}/download"
                 .Replace("{bucketId}", bucketId)
                 .Replace("{fileId}", fileId);
@@ -260,6 +311,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<byte[]> GetFilePreview(string bucketId, string fileId, long? width = null, long? height = null, Appwrite.Enums.ImageGravity? gravity = null, long? quality = null, long? borderWidth = null, string? borderColor = null, long? borderRadius = null, double? opacity = null, long? rotation = null, string? background = null, Appwrite.Enums.ImageFormat? output = null, string? token = null)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
+            if (fileId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"fileId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}/preview"
                 .Replace("{bucketId}", bucketId)
                 .Replace("{fileId}", fileId);
@@ -305,6 +366,16 @@ namespace Appwrite.Services
         /// </summary>
         public UniTask<byte[]> GetFileView(string bucketId, string fileId, string? token = null)
         {
+            if (bucketId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"bucketId\"");
+            }
+
+            if (fileId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"fileId\"");
+            }
+
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}/view"
                 .Replace("{bucketId}", bucketId)
                 .Replace("{fileId}", fileId);

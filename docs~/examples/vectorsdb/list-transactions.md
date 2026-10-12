@@ -10,6 +10,7 @@ Client client = Client.From(
 VectorsDB vectorsDB = new VectorsDB(client);
 
 TransactionList result = await vectorsDB.ListTransactions(
-    queries: new List<string>() // optional
+    queries: new List<string>(), // optional
+    total: false // optional
 );
 ```

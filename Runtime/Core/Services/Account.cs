@@ -1202,6 +1202,244 @@ namespace Appwrite.Services
 
         /// <summary>
         /// <para>
+        /// Get the list of verified passkeys registered by the currently logged in
+        /// user.
+        /// </para>
+        /// </summary>
+        public UniTask<Models.PasskeyList> ListPasskeys(List<string>? queries = null, bool? total = null)
+        {
+            var apiPath = "/account/passkeys";
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "queries", queries },
+                { "total", total }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.PasskeyList Convert(Dictionary<string, object> it) =>
+                Models.PasskeyList.From(map: it);
+
+            return _client.Call<Models.PasskeyList>(
+                method: "GET",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Start registering a passkey for the currently logged in user. The session
+        /// must have signed in or completed an MFA challenge within the last 10
+        /// minutes. Pass the returned `publicKey` options to
+        /// `navigator.credentials.create()`, then complete the registration with
+        /// [Update passkey
+        /// verification](/docs/references/cloud/client-web/account#updatePasskeyVerification).
+        /// The passkey stays pending until verified, and the challenge expires after 5
+        /// minutes.
+        /// </para>
+        /// </summary>
+        public UniTask<Models.PasskeyChallenge> CreatePasskey(string? passkeyId = null, string? name = null)
+        {
+            var apiPath = "/account/passkeys";
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "passkeyId", passkeyId },
+                { "name", name }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.PasskeyChallenge Convert(Dictionary<string, object> it) =>
+                Models.PasskeyChallenge.From(map: it);
+
+            return _client.Call<Models.PasskeyChallenge>(
+                method: "POST",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Get a verified passkey of the currently logged in user by its unique ID.
+        /// </para>
+        /// </summary>
+        public UniTask<Models.Passkey> GetPasskey(string passkeyId)
+        {
+            if (passkeyId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"passkeyId\"");
+            }
+
+            var apiPath = "/account/passkeys/{passkeyId}"
+                .Replace("{passkeyId}", passkeyId);
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.Passkey Convert(Dictionary<string, object> it) =>
+                Models.Passkey.From(map: it);
+
+            return _client.Call<Models.Passkey>(
+                method: "GET",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Rename a passkey of the currently logged in user.
+        /// </para>
+        /// </summary>
+        public UniTask<Models.Passkey> UpdatePasskey(string passkeyId, string name)
+        {
+            if (passkeyId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"passkeyId\"");
+            }
+
+            var apiPath = "/account/passkeys/{passkeyId}"
+                .Replace("{passkeyId}", passkeyId);
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "name", name }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.Passkey Convert(Dictionary<string, object> it) =>
+                Models.Passkey.From(map: it);
+
+            return _client.Call<Models.Passkey>(
+                method: "PATCH",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Delete a passkey from the currently logged in user. The passkey can no
+        /// longer be used to sign in, although it may remain stored on the user's
+        /// device. The session must have signed in or completed an MFA challenge
+        /// within the last 10 minutes.
+        /// </para>
+        /// </summary>
+        public UniTask<object> DeletePasskey(string passkeyId)
+        {
+            if (passkeyId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"passkeyId\"");
+            }
+
+            var apiPath = "/account/passkeys/{passkeyId}"
+                .Replace("{passkeyId}", passkeyId);
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+
+            return _client.Call<object>(
+                method: "DELETE",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Complete a passkey registration started with [Create
+        /// passkey](/docs/references/cloud/client-web/account#createPasskey). Pass the
+        /// JSON form of the credential returned by `navigator.credentials.create()`,
+        /// for example `credential.toJSON()`. Each registration can be verified once;
+        /// a failed attempt requires starting it again.
+        /// </para>
+        /// </summary>
+        public UniTask<Models.Passkey> UpdatePasskeyVerification(string passkeyId, object credential)
+        {
+            if (passkeyId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"passkeyId\"");
+            }
+
+            var apiPath = "/account/passkeys/{passkeyId}/verification"
+                .Replace("{passkeyId}", passkeyId);
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "credential", credential }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.Passkey Convert(Dictionary<string, object> it) =>
+                Models.Passkey.From(map: it);
+
+            return _client.Call<Models.Passkey>(
+                method: "PUT",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
         /// Update currently logged in user password. For validation, user is required
         /// to pass in the new password, and the old password. For users created with
         /// OAuth, Team Invites and Magic URL, oldPassword is optional.
@@ -1527,12 +1765,13 @@ namespace Appwrite.Services
         /// logged in user.
         /// </para>
         /// </summary>
-        public UniTask<Models.SessionList> ListSessions()
+        public UniTask<Models.SessionList> ListSessions(bool? total = null)
         {
             var apiPath = "/account/sessions";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -1557,15 +1796,17 @@ namespace Appwrite.Services
         /// <summary>
         /// <para>
         /// Delete all sessions from the user account and remove any sessions cookies
-        /// from the end client.
+        /// from the end client. Pass `current` as false to keep the session making the
+        /// request and sign out of every other session.
         /// </para>
         /// </summary>
-        public UniTask<object> DeleteSessions()
+        public UniTask<object> DeleteSessions(bool? current = null)
         {
             var apiPath = "/account/sessions";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "current", current }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -1628,20 +1869,24 @@ namespace Appwrite.Services
         /// <para>
         /// Allow the user to login into their account by providing a valid email and
         /// password combination. This route will create a new session for the user.
+        /// Use the optional `duration` parameter to create a shorter session, for
+        /// example when the user doesn't choose "remember me". It must be at least 60
+        /// seconds and cannot exceed the project maximum session length.
         /// 
         /// A user is limited to 10 active sessions at a time by default. [Learn more
         /// about session
         /// limits](https://appwrite.io/docs/authentication-security#limits).
         /// </para>
         /// </summary>
-        public UniTask<Models.Session> CreateEmailPasswordSession(string email, string password)
+        public UniTask<Models.Session> CreateEmailPasswordSession(string email, string password, long? duration = null)
         {
             var apiPath = "/account/sessions/email";
 
             var apiParameters = new Dictionary<string, object?>()
             {
                 { "email", email },
-                { "password", password }
+                { "password", password },
+                { "duration", duration }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -1803,7 +2048,7 @@ namespace Appwrite.Services
         /// </para>
         /// </summary>
 #if UNITY_EDITOR || UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL
-        public async UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public async UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             var apiPath = "/account/sessions/oauth2/{provider}"
                 .Replace("{provider}", provider.Value);
@@ -1812,7 +2057,8 @@ namespace Appwrite.Services
             {
                 { "success", success },
                 { "failure", failure },
-                { "scopes", scopes }
+                { "scopes", scopes },
+                { "state", state }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -1857,7 +2103,7 @@ namespace Appwrite.Services
 
         }
 #else
-        public UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             Debug.LogWarning("[Appwrite] OAuth2 authorization is not supported on this platform. Available only in Editor, WebGL, iOS or Android.");
             return UniTask.CompletedTask;
@@ -2340,7 +2586,7 @@ namespace Appwrite.Services
         /// </para>
         /// </summary>
 #if UNITY_EDITOR || UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL
-        public async UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public async UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             var apiPath = "/account/tokens/oauth2/{provider}"
                 .Replace("{provider}", provider.Value);
@@ -2349,7 +2595,8 @@ namespace Appwrite.Services
             {
                 { "success", success },
                 { "failure", failure },
-                { "scopes", scopes }
+                { "scopes", scopes },
+                { "state", state }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -2394,12 +2641,94 @@ namespace Appwrite.Services
 
         }
 #else
-        public UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             Debug.LogWarning("[Appwrite] OAuth2 authorization is not supported on this platform. Available only in Editor, WebGL, iOS or Android.");
             return UniTask.CompletedTask;
         }
 #endif
+        /// <summary>
+        /// <para>
+        /// Start signing in with a passkey. No email or user ID is needed: pass the
+        /// returned `publicKey` options to `navigator.credentials.get()` and the user
+        /// picks one of their passkeys. Then call [Update passkey
+        /// token](/docs/references/cloud/client-web/account#updatePasskeyToken) with
+        /// the credential to receive a token, and exchange it with [Create
+        /// session](/docs/references/cloud/client-web/account#createSession). The
+        /// challenge expires after 5 minutes.
+        /// </para>
+        /// </summary>
+        public UniTask<Models.PasskeyChallenge> CreatePasskeyToken()
+        {
+            var apiPath = "/account/tokens/passkey";
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.PasskeyChallenge Convert(Dictionary<string, object> it) =>
+                Models.PasskeyChallenge.From(map: it);
+
+            return _client.Call<Models.PasskeyChallenge>(
+                method: "POST",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Complete a passkey sign-in started with [Create passkey
+        /// token](/docs/references/cloud/client-web/account#createPasskeyToken). Pass
+        /// the challenge ID and the JSON form of the credential returned by
+        /// `navigator.credentials.get()`, for example `credential.toJSON()`. The
+        /// returned token includes its secret and expires after 1 minute: exchange it
+        /// for a session with [Create
+        /// session](/docs/references/cloud/client-web/account#createSession). Passkeys
+        /// require user verification, so the session also satisfies MFA. Each
+        /// challenge can only be used once.
+        /// </para>
+        /// </summary>
+        public UniTask<Models.TokenSecret> UpdatePasskeyToken(string challengeId, object credential)
+        {
+            var apiPath = "/account/tokens/passkey";
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "challengeId", challengeId },
+                { "credential", credential }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.TokenSecret Convert(Dictionary<string, object> it) =>
+                Models.TokenSecret.From(map: it);
+
+            return _client.Call<Models.TokenSecret>(
+                method: "PUT",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
         /// <summary>
         /// <para>
         /// Sends the user an SMS with a secret key for creating a session. If the

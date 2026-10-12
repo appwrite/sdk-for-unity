@@ -11,6 +11,7 @@ Account account = new Account(client);
 
 Session result = await account.CreateEmailPasswordSession(
     email: "email@example.com",
-    password: "password"
+    password: "password",
+    duration: 60 // optional
 );
 ```

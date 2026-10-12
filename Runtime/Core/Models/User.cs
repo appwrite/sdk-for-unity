@@ -152,20 +152,20 @@ namespace Appwrite.Models
         }
 
         public static User From(Dictionary<string, object> map) => new User(
-            id: map["$id"].ToString(),
-            createdAt: map["$createdAt"].ToString(),
-            updatedAt: map["$updatedAt"].ToString(),
-            name: map["name"].ToString(),
+            id: (map.ContainsKey("$id") ? map["$id"] : "").ToString(),
+            createdAt: (map.ContainsKey("$createdAt") ? map["$createdAt"] : "").ToString(),
+            updatedAt: (map.ContainsKey("$updatedAt") ? map["$updatedAt"] : "").ToString(),
+            name: (map.ContainsKey("name") ? map["name"] : "").ToString(),
             password: map.TryGetValue("password", out var password) ? password?.ToString() : null,
             hash: map.TryGetValue("hash", out var hash) ? hash?.ToString() : null,
             hashOptions: map.TryGetValue("hashOptions", out var objectRaw7) ? objectRaw7 : null,
-            registration: map["registration"].ToString(),
-            status: (bool)map["status"],
-            labels: map["labels"].ConvertToList<string>(),
-            passwordUpdate: map["passwordUpdate"].ToString(),
-            email: map["email"].ToString(),
-            phone: map["phone"].ToString(),
-            emailVerification: (bool)map["emailVerification"],
+            registration: (map.ContainsKey("registration") ? map["registration"] : "").ToString(),
+            status: (bool)(map.ContainsKey("status") ? map["status"] : true),
+            labels: (map.ContainsKey("labels") ? map["labels"] : new List<object>()).ConvertToList<string>(),
+            passwordUpdate: (map.ContainsKey("passwordUpdate") ? map["passwordUpdate"] : "").ToString(),
+            email: (map.ContainsKey("email") ? map["email"] : "").ToString(),
+            phone: (map.ContainsKey("phone") ? map["phone"] : "").ToString(),
+            emailVerification: (bool)(map.ContainsKey("emailVerification") ? map["emailVerification"] : false),
             emailCanonical: map.TryGetValue("emailCanonical", out var emailCanonical) ? emailCanonical?.ToString() : null,
             emailIsFree: map.TryGetValue("emailIsFree", out var boolRaw16) && boolRaw16 != null
                                         ? (bool?)boolRaw16
@@ -182,11 +182,11 @@ namespace Appwrite.Models
             passwordPwned: map.TryGetValue("passwordPwned", out var boolRaw20) && boolRaw20 != null
                                         ? (bool?)boolRaw20
                                         : null,
-            phoneVerification: (bool)map["phoneVerification"],
-            mfa: (bool)map["mfa"],
+            phoneVerification: (bool)(map.ContainsKey("phoneVerification") ? map["phoneVerification"] : false),
+            mfa: (bool)(map.ContainsKey("mfa") ? map["mfa"] : false),
             prefs: Appwrite.Models.Preferences.From(map: map["prefs"] is JsonElement jsonObj23 ? jsonObj23.Deserialize<Dictionary<string, object>>()! : (Dictionary<string, object>)map["prefs"]),
             targets: map["targets"].ConvertToList<Dictionary<string, object>>().Select(it => Appwrite.Models.Target.From(map: it)).ToList(),
-            accessedAt: map["accessedAt"].ToString(),
+            accessedAt: (map.ContainsKey("accessedAt") ? map["accessedAt"] : "").ToString(),
             impersonator: map.TryGetValue("impersonator", out var boolRaw26) && boolRaw26 != null
                                         ? (bool?)boolRaw26
                                         : null,

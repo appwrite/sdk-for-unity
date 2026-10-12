@@ -492,7 +492,7 @@ namespace Appwrite.Services
         /// 
         /// </para>
         /// </summary>
-        public UniTask<Models.Membership> CreateMembership(string teamId, List<string> roles, string? email = null, string? userId = null, string? phone = null, string? url = null, string? name = null)
+        public UniTask<Models.Membership> CreateMembership(string teamId, List<string> roles, string? membershipId = null, string? email = null, string? userId = null, string? phone = null, string? url = null, string? name = null)
         {
             if (teamId == "")
             {
@@ -504,6 +504,7 @@ namespace Appwrite.Services
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "membershipId", membershipId },
                 { "email", email },
                 { "userId", userId },
                 { "phone", phone },

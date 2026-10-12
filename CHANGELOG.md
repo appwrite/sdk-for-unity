@@ -1,5 +1,29 @@
 # Change Log
 
+## 0.8.0
+
+* Breaking: `AppwriteService` flag values shifted by new `Analytics`, `Apps`, `Oauth2` bits; re-save custom `AppwriteConfig` assets
+* Breaking: `Teams.CreateMembership` takes `membershipId` after `roles`; positional callers must update
+* Added: `Account.ListPasskeys`, `CreatePasskey`, `GetPasskey`, `UpdatePasskey` and `DeletePasskey`
+* Added: `Account.UpdatePasskeyVerification` to finish registering a passkey
+* Added: `Account.CreatePasskeyToken` and `Account.UpdatePasskeyToken` for passkey sign-in
+* Added: `Passkey`, `PasskeyList`, `PasskeyChallenge` and `TokenSecret` models
+* Added: `Push` component for MQTT realtime push, exposed as `AppwriteManager.Push`
+* Added: `Topic` builder, `Client.SetPushEndpoint` and `Client.SetPushClientId`
+* Added: `Analytics` service with `CreateEvent`
+* Added: `Apps` service to manage OAuth2 apps, keys, secrets, and installations
+* Added: `Oauth2` service for authorization, consent, device, PAR, and token flows
+* Added: `Avatars.UpdatePhoto` and `Avatars.DeletePhoto` methods
+* Added: `App`, `Oauth2*`, and `Account` models
+* Added: `state` parameter to `Account.CreateOAuth2Session` and `Account.CreateOAuth2Token`
+* Added: `duration` on `CreateEmailPasswordSession` and `current` on `DeleteSessions`
+* Added: `total` parameter to `Account.ListSessions`, `Locale` list methods and `ListTransactions`
+* Added: `Webflow` to the `OAuthProvider` enum
+* Fixed: response models fill missing fields from spec defaults instead of throwing
+* Updated: bundles `MQTTnet` 4.3.7 for `Push`
+* Updated: SDK now targets Appwrite 2.4 (`X-Appwrite-Response-Format: 2.4.0`)
+* Fixed: an exactly-chunk-sized file uploads in a single request
+
 ## 0.7.0
 
 * Breaking: removed `Account.ListLogs` and the `Log`, `LogList` models

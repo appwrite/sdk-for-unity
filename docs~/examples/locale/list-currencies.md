@@ -9,5 +9,7 @@ Client client = Client.From(
 
 Locale locale = new Locale(client);
 
-CurrencyList result = await locale.ListCurrencies();
+CurrencyList result = await locale.ListCurrencies(
+    total: false // optional
+);
 ```

@@ -14,6 +14,7 @@ await account.CreateOAuth2Session(
     provider: OAuthProvider.Amazon,
     success: "https://example.com", // optional
     failure: "https://example.com", // optional
-    scopes: new List<string>() // optional
+    scopes: new List<string>(), // optional
+    state: "<STATE>" // optional
 );
 ```

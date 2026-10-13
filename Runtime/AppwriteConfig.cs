@@ -22,9 +22,10 @@ namespace Appwrite
         TablesDB = 1 << 11,
         Teams = 1 << 12,
         VectorsDB = 1 << 13,
+        Analytics = 1 << 14,
 
         [Tooltip("Selects all available services.")]
-        All = Account | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Organization | Presences | Storage | TablesDB | Teams | VectorsDB
+        All = Account | Analytics | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Organization | Presences | Storage | TablesDB | Teams | VectorsDB
     }
 
     /// <summary>

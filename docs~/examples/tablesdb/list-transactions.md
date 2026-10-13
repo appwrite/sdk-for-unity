@@ -10,6 +10,7 @@ Client client = Client.From(
 TablesDB tablesDB = new TablesDB(client);
 
 TransactionList result = await tablesDB.ListTransactions(
-    queries: new List<string>() // optional
+    queries: new List<string>(), // optional
+    total: false // optional
 );
 ```

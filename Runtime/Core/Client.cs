@@ -72,11 +72,11 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent", $"AppwriteUnitySDK/0.8.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.9.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.8.0"},
+                { "x-sdk-version", "0.9.0"},
                 { "X-Appwrite-Response-Format", "2.3.0" }
             };
 
@@ -791,7 +791,8 @@ namespace Appwrite
             Func<Dictionary<string, object>, T> converter,
             string paramName,
             string? idParamName = null,
-            Action<UploadProgress>? onProgress = null) where T : class
+            Action<UploadProgress>? onProgress = null,
+            string method = "POST") where T : class
         {
             if (string.IsNullOrEmpty(paramName))
                 throw new ArgumentException("Parameter name cannot be null or empty", nameof(paramName));
@@ -869,7 +870,7 @@ namespace Appwrite
                     };
 
                     return await Call(
-                        method: "POST",
+                        method: method,
                         path,
                         multipartHeaders,
                         multipartParameters,
@@ -951,7 +952,7 @@ namespace Appwrite
                     };
 
                     result = await Call<Dictionary<string, object?>>(
-                        method: "POST",
+                        method: method,
                         path,
                         chunkHeaders,
                         chunkParameters

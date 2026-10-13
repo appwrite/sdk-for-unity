@@ -127,6 +127,7 @@ namespace Appwrite
         private readonly Dictionary<Type, (AppwriteService flag, Func<Client, Service> factory)> _serviceDefinitions = new()
         {
             { typeof(Appwrite.Services.Account), (AppwriteService.Account, client => new Appwrite.Services.Account(client)) },
+            { typeof(Appwrite.Services.Analytics), (AppwriteService.Analytics, client => new Appwrite.Services.Analytics(client)) },
             { typeof(Appwrite.Services.Avatars), (AppwriteService.Avatars, client => new Appwrite.Services.Avatars(client)) },
             { typeof(Appwrite.Services.Databases), (AppwriteService.Databases, client => new Appwrite.Services.Databases(client)) },
             { typeof(Appwrite.Services.DocumentsDB), (AppwriteService.DocumentsDB, client => new Appwrite.Services.DocumentsDB(client)) },

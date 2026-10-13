@@ -9,5 +9,7 @@ Client client = Client.From(
 
 Locale locale = new Locale(client);
 
-CountryList result = await locale.ListCountriesEU();
+CountryList result = await locale.ListCountriesEU(
+    total: false // optional
+);
 ```

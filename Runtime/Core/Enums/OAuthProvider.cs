@@ -53,6 +53,7 @@ namespace Appwrite.Enums
         public static OAuthProvider Tradeshift => new OAuthProvider("tradeshift");
         public static OAuthProvider TradeshiftBox => new OAuthProvider("tradeshiftBox");
         public static OAuthProvider Twitch => new OAuthProvider("twitch");
+        public static OAuthProvider Webflow => new OAuthProvider("webflow");
         public static OAuthProvider Wordpress => new OAuthProvider("wordpress");
         public static OAuthProvider X => new OAuthProvider("x");
         public static OAuthProvider Yahoo => new OAuthProvider("yahoo");

@@ -9,5 +9,7 @@ Client client = Client.From(
 
 Account account = new Account(client);
 
-SessionList result = await account.ListSessions();
+SessionList result = await account.ListSessions(
+    total: false // optional
+);
 ```

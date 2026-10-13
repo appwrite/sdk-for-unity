@@ -9,5 +9,7 @@ Client client = Client.From(
 
 Account account = new Account(client);
 
-await account.DeleteSessions();
+await account.DeleteSessions(
+    current: false // optional
+);
 ```

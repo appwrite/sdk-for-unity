@@ -56,12 +56,13 @@ namespace Appwrite.Services
         /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
         /// </para>
         /// </summary>
-        public UniTask<Models.LocaleCodeList> ListCodes()
+        public UniTask<Models.LocaleCodeList> ListCodes(bool? total = null)
         {
             var apiPath = "/locale/codes";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -89,12 +90,13 @@ namespace Appwrite.Services
         /// supported language.
         /// </para>
         /// </summary>
-        public UniTask<Models.ContinentList> ListContinents()
+        public UniTask<Models.ContinentList> ListContinents(bool? total = null)
         {
             var apiPath = "/locale/continents";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -122,12 +124,13 @@ namespace Appwrite.Services
         /// supported language.
         /// </para>
         /// </summary>
-        public UniTask<Models.CountryList> ListCountries()
+        public UniTask<Models.CountryList> ListCountries(bool? total = null)
         {
             var apiPath = "/locale/countries";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -155,12 +158,13 @@ namespace Appwrite.Services
         /// locale header to get the data in a supported language.
         /// </para>
         /// </summary>
-        public UniTask<Models.CountryList> ListCountriesEU()
+        public UniTask<Models.CountryList> ListCountriesEU(bool? total = null)
         {
             var apiPath = "/locale/countries/eu";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -188,12 +192,13 @@ namespace Appwrite.Services
         /// data in a supported language.
         /// </para>
         /// </summary>
-        public UniTask<Models.PhoneList> ListCountriesPhones()
+        public UniTask<Models.PhoneList> ListCountriesPhones(bool? total = null)
         {
             var apiPath = "/locale/countries/phones";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -222,12 +227,13 @@ namespace Appwrite.Services
         /// header to get the data in a supported language.
         /// </para>
         /// </summary>
-        public UniTask<Models.CurrencyList> ListCurrencies()
+        public UniTask<Models.CurrencyList> ListCurrencies(bool? total = null)
         {
             var apiPath = "/locale/currencies";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -255,12 +261,13 @@ namespace Appwrite.Services
         /// in English, and name in the respective language.
         /// </para>
         /// </summary>
-        public UniTask<Models.LanguageList> ListLanguages()
+        public UniTask<Models.LanguageList> ListLanguages(bool? total = null)
         {
             var apiPath = "/locale/languages";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()

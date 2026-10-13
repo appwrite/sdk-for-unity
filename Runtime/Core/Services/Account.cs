@@ -1765,12 +1765,13 @@ namespace Appwrite.Services
         /// logged in user.
         /// </para>
         /// </summary>
-        public UniTask<Models.SessionList> ListSessions()
+        public UniTask<Models.SessionList> ListSessions(bool? total = null)
         {
             var apiPath = "/account/sessions";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "total", total }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -1798,12 +1799,13 @@ namespace Appwrite.Services
         /// from the end client.
         /// </para>
         /// </summary>
-        public UniTask<object> DeleteSessions()
+        public UniTask<object> DeleteSessions(bool? current = null)
         {
             var apiPath = "/account/sessions";
 
             var apiParameters = new Dictionary<string, object?>()
             {
+                { "current", current }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -1872,14 +1874,15 @@ namespace Appwrite.Services
         /// limits](https://appwrite.io/docs/authentication-security#limits).
         /// </para>
         /// </summary>
-        public UniTask<Models.Session> CreateEmailPasswordSession(string email, string password)
+        public UniTask<Models.Session> CreateEmailPasswordSession(string email, string password, long? duration = null)
         {
             var apiPath = "/account/sessions/email";
 
             var apiParameters = new Dictionary<string, object?>()
             {
                 { "email", email },
-                { "password", password }
+                { "password", password },
+                { "duration", duration }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -2041,7 +2044,7 @@ namespace Appwrite.Services
         /// </para>
         /// </summary>
 #if UNITY_EDITOR || UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL
-        public async UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public async UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             var apiPath = "/account/sessions/oauth2/{provider}"
                 .Replace("{provider}", provider.Value);
@@ -2050,7 +2053,8 @@ namespace Appwrite.Services
             {
                 { "success", success },
                 { "failure", failure },
-                { "scopes", scopes }
+                { "scopes", scopes },
+                { "state", state }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -2095,7 +2099,7 @@ namespace Appwrite.Services
 
         }
 #else
-        public UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             Debug.LogWarning("[Appwrite] OAuth2 authorization is not supported on this platform. Available only in Editor, WebGL, iOS or Android.");
             return UniTask.CompletedTask;
@@ -2578,7 +2582,7 @@ namespace Appwrite.Services
         /// </para>
         /// </summary>
 #if UNITY_EDITOR || UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL
-        public async UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public async UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             var apiPath = "/account/tokens/oauth2/{provider}"
                 .Replace("{provider}", provider.Value);
@@ -2587,7 +2591,8 @@ namespace Appwrite.Services
             {
                 { "success", success },
                 { "failure", failure },
-                { "scopes", scopes }
+                { "scopes", scopes },
+                { "state", state }
             };
 
             var apiHeaders = new Dictionary<string, string>()
@@ -2632,7 +2637,7 @@ namespace Appwrite.Services
 
         }
 #else
-        public UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null)
+        public UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             Debug.LogWarning("[Appwrite] OAuth2 authorization is not supported on this platform. Available only in Editor, WebGL, iOS or Android.");
             return UniTask.CompletedTask;

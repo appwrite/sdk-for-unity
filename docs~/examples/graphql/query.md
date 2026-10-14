@@ -10,6 +10,6 @@ Client client = Client.From(
 Graphql graphql = new Graphql(client);
 
 Any result = await graphql.Query(
-    query: [object]
+    query: new { query = "query { localeGet { ip } }" }
 );
 ```

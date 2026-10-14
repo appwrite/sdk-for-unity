@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.10.0
+
+* Breaking: requests send `X-Appwrite-Response-Format: 2.5.0`; responses follow the 2.5 shapes
+* Breaking: missing response fields are filled with their documented defaults
+* Added: `Apps` service to manage apps, installations, keys and secrets
+* Added: `Oauth2` service for the OAuth2 authorize, token, device and grant flows
+* Fixed: a file exactly `ChunkSize` bytes long uploads in a single request
+
 ## 0.9.0
 
 * Added: `analytics.createEvent` in a new `Analytics` service to send tracking events

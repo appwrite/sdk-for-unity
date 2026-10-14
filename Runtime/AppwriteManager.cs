@@ -41,16 +41,16 @@ namespace Appwrite
             } 
         }
         
-        public Realtime Realtime 
-        { 
-            get 
-            { 
+        public Realtime Realtime
+        {
+            get
+            {
                 if (ReferenceEquals(_realtime, null))
                     Debug.LogWarning("Realtime was not initialized. Call Initialize(true) to enable it.");
-                return _realtime; 
-            } 
+                return _realtime;
+            }
         }
-        
+
         public bool IsInitialized => _isInitialized;
         public AppwriteConfig Config => config;
 
@@ -128,6 +128,7 @@ namespace Appwrite
         {
             { typeof(Appwrite.Services.Account), (AppwriteService.Account, client => new Appwrite.Services.Account(client)) },
             { typeof(Appwrite.Services.Analytics), (AppwriteService.Analytics, client => new Appwrite.Services.Analytics(client)) },
+            { typeof(Appwrite.Services.Apps), (AppwriteService.Apps, client => new Appwrite.Services.Apps(client)) },
             { typeof(Appwrite.Services.Avatars), (AppwriteService.Avatars, client => new Appwrite.Services.Avatars(client)) },
             { typeof(Appwrite.Services.Databases), (AppwriteService.Databases, client => new Appwrite.Services.Databases(client)) },
             { typeof(Appwrite.Services.DocumentsDB), (AppwriteService.DocumentsDB, client => new Appwrite.Services.DocumentsDB(client)) },
@@ -135,6 +136,7 @@ namespace Appwrite
             { typeof(Appwrite.Services.Graphql), (AppwriteService.Graphql, client => new Appwrite.Services.Graphql(client)) },
             { typeof(Appwrite.Services.Locale), (AppwriteService.Locale, client => new Appwrite.Services.Locale(client)) },
             { typeof(Appwrite.Services.Messaging), (AppwriteService.Messaging, client => new Appwrite.Services.Messaging(client)) },
+            { typeof(Appwrite.Services.Oauth2), (AppwriteService.Oauth2, client => new Appwrite.Services.Oauth2(client)) },
             { typeof(Appwrite.Services.Organization), (AppwriteService.Organization, client => new Appwrite.Services.Organization(client)) },
             { typeof(Appwrite.Services.Presences), (AppwriteService.Presences, client => new Appwrite.Services.Presences(client)) },
             { typeof(Appwrite.Services.Storage), (AppwriteService.Storage, client => new Appwrite.Services.Storage(client)) },

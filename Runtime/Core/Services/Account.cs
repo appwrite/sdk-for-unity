@@ -1796,7 +1796,8 @@ namespace Appwrite.Services
         /// <summary>
         /// <para>
         /// Delete all sessions from the user account and remove any sessions cookies
-        /// from the end client.
+        /// from the end client. Pass `current` as false to keep the session making the
+        /// request and sign out of every other session.
         /// </para>
         /// </summary>
         public UniTask<object> DeleteSessions(bool? current = null)
@@ -1868,6 +1869,9 @@ namespace Appwrite.Services
         /// <para>
         /// Allow the user to login into their account by providing a valid email and
         /// password combination. This route will create a new session for the user.
+        /// Use the optional `duration` parameter to create a shorter session, for
+        /// example when the user doesn't choose "remember me". It must be at least 60
+        /// seconds and cannot exceed the project maximum session length.
         /// 
         /// A user is limited to 10 active sessions at a time by default. [Learn more
         /// about session

@@ -9,23 +9,25 @@ namespace Appwrite
     {
         None = 0,
         Account = 1 << 0,
-        Avatars = 1 << 1,
-        Databases = 1 << 2,
-        DocumentsDB = 1 << 3,
-        Functions = 1 << 4,
-        Graphql = 1 << 5,
-        Locale = 1 << 6,
-        Messaging = 1 << 7,
-        Organization = 1 << 8,
-        Presences = 1 << 9,
-        Storage = 1 << 10,
-        TablesDB = 1 << 11,
-        Teams = 1 << 12,
-        VectorsDB = 1 << 13,
-        Analytics = 1 << 14,
+        Analytics = 1 << 1,
+        Apps = 1 << 2,
+        Avatars = 1 << 3,
+        Databases = 1 << 4,
+        DocumentsDB = 1 << 5,
+        Functions = 1 << 6,
+        Graphql = 1 << 7,
+        Locale = 1 << 8,
+        Messaging = 1 << 9,
+        Oauth2 = 1 << 10,
+        Organization = 1 << 11,
+        Presences = 1 << 12,
+        Storage = 1 << 13,
+        TablesDB = 1 << 14,
+        Teams = 1 << 15,
+        VectorsDB = 1 << 16,
 
         [Tooltip("Selects all available services.")]
-        All = Account | Analytics | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Organization | Presences | Storage | TablesDB | Teams | VectorsDB
+        All = Account | Analytics | Apps | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Oauth2 | Organization | Presences | Storage | TablesDB | Teams | VectorsDB
     }
 
     /// <summary>

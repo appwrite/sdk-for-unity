@@ -10,6 +10,6 @@ Client client = Client.From(
 Graphql graphql = new Graphql(client);
 
 Any result = await graphql.Mutation(
-    query: [object]
+    query: new { query = "mutation { accountUpdateName(name: "Walter") { name } }" }
 );
 ```

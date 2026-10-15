@@ -117,7 +117,8 @@ namespace Appwrite.Services
                 Convert,
                 paramName,
                 idParamName,
-                onProgress);
+                onProgress,
+                method: "POST");
         }
 
         /// <summary>

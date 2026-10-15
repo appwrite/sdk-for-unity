@@ -19,6 +19,7 @@ namespace Appwrite
         
         private Client _client;
         private Realtime _realtime;
+        private Push _push;
         private bool _isInitialized;
         
         private readonly Dictionary<Type, object> _services = new();
@@ -41,16 +42,37 @@ namespace Appwrite
             } 
         }
         
-        public Realtime Realtime 
-        { 
-            get 
-            { 
+        public Realtime Realtime
+        {
+            get
+            {
                 if (ReferenceEquals(_realtime, null))
                     Debug.LogWarning("Realtime was not initialized. Call Initialize(true) to enable it.");
-                return _realtime; 
-            } 
+                return _realtime;
+            }
         }
-        
+
+        /// <summary>
+        /// Native push (MQTT) service. Created lazily on first access — set a
+        /// credential and subscribe, e.g. <c>Push.SetJWT(jwt)</c>.
+        /// </summary>
+        public Push Push
+        {
+            get
+            {
+                if (_client == null)
+                    throw new InvalidOperationException("Appwrite client is not initialized. Call Initialize() first.");
+                if (ReferenceEquals(_push, null))
+                {
+                    var pushGo = new GameObject("Push");
+                    pushGo.transform.SetParent(transform);
+                    _push = pushGo.AddComponent<Push>();
+                    _push.Initialize(_client);
+                }
+                return _push;
+            }
+        }
+
         public bool IsInitialized => _isInitialized;
         public AppwriteConfig Config => config;
 
@@ -128,6 +150,7 @@ namespace Appwrite
         {
             { typeof(Appwrite.Services.Account), (AppwriteService.Account, client => new Appwrite.Services.Account(client)) },
             { typeof(Appwrite.Services.Analytics), (AppwriteService.Analytics, client => new Appwrite.Services.Analytics(client)) },
+            { typeof(Appwrite.Services.Apps), (AppwriteService.Apps, client => new Appwrite.Services.Apps(client)) },
             { typeof(Appwrite.Services.Avatars), (AppwriteService.Avatars, client => new Appwrite.Services.Avatars(client)) },
             { typeof(Appwrite.Services.Databases), (AppwriteService.Databases, client => new Appwrite.Services.Databases(client)) },
             { typeof(Appwrite.Services.DocumentsDB), (AppwriteService.DocumentsDB, client => new Appwrite.Services.DocumentsDB(client)) },
@@ -135,6 +158,7 @@ namespace Appwrite
             { typeof(Appwrite.Services.Graphql), (AppwriteService.Graphql, client => new Appwrite.Services.Graphql(client)) },
             { typeof(Appwrite.Services.Locale), (AppwriteService.Locale, client => new Appwrite.Services.Locale(client)) },
             { typeof(Appwrite.Services.Messaging), (AppwriteService.Messaging, client => new Appwrite.Services.Messaging(client)) },
+            { typeof(Appwrite.Services.Oauth2), (AppwriteService.Oauth2, client => new Appwrite.Services.Oauth2(client)) },
             { typeof(Appwrite.Services.Organization), (AppwriteService.Organization, client => new Appwrite.Services.Organization(client)) },
             { typeof(Appwrite.Services.Presences), (AppwriteService.Presences, client => new Appwrite.Services.Presences(client)) },
             { typeof(Appwrite.Services.Storage), (AppwriteService.Storage, client => new Appwrite.Services.Storage(client)) },
@@ -255,6 +279,13 @@ namespace Appwrite
                     Destroy(_realtime.gameObject);
             }
             _realtime = null;
+            if (!ReferenceEquals(_push, null))
+            {
+                _push.Close();
+                if (_push.gameObject != null)
+                    Destroy(_push.gameObject);
+            }
+            _push = null;
             _client = null;
             _isInitialized = false;
             _services.Clear();

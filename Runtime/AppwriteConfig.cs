@@ -23,16 +23,18 @@ namespace Appwrite
         Teams = 1 << 12,
         VectorsDB = 1 << 13,
         Analytics = 1 << 14,
+        Apps = 1 << 15,
+        Oauth2 = 1 << 16,
 
         [Tooltip("Selects all available services.")]
-        All = Account | Analytics | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Organization | Presences | Storage | TablesDB | Teams | VectorsDB
+        All = Account | Analytics | Apps | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Oauth2 | Organization | Presences | Storage | TablesDB | Teams | VectorsDB
     }
 
     /// <summary>
     /// ScriptableObject configuration for Appwrite client settings
     /// </summary>
     [CreateAssetMenu(fileName = "AppwriteConfig", menuName = "Appwrite/Configuration")]
-    public class AppwriteConfig : ScriptableObject
+    public class AppwriteConfig : ScriptableObject, ISerializationCallbackReceiver
     {
         [Header("Connection Settings")]
         [Tooltip("Endpoint URL for Appwrite API (e.g., https://cloud.appwrite.io/v1)")]
@@ -52,6 +54,9 @@ namespace Appwrite
         [Tooltip("Select which Appwrite services to initialize.")]
         [SerializeField] private AppwriteService servicesToInitialize = AppwriteService.All;
 
+        // The services this SDK knew when the asset was saved; 0 on assets saved before it was recorded
+        [SerializeField, HideInInspector] private int knownServices;
+
         [Header("Advanced Settings")]
         [Tooltip("Automatically connect to Appwrite on start")]
         [SerializeField] private bool autoConnect;
@@ -62,6 +67,21 @@ namespace Appwrite
         public string ProjectId => projectId;
         public bool AutoConnect => autoConnect;
         public AppwriteService ServicesToInitialize => servicesToInitialize;
+
+        public void OnBeforeSerialize()
+        {
+            knownServices = (int)AppwriteService.All;
+        }
+
+        /// <summary>
+        /// A config that selected every service it knew about also selects the services added since.
+        /// </summary>
+        public void OnAfterDeserialize()
+        {
+            var known = knownServices == 0 ? 32767 : knownServices;
+            if (known != 0 && ((int)servicesToInitialize & known) == known)
+                servicesToInitialize |= AppwriteService.All;
+        }
 
         /// <summary>
         /// Validate configuration settings

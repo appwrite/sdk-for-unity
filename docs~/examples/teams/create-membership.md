@@ -11,7 +11,7 @@ Teams teams = new Teams(client);
 
 Membership result = await teams.CreateMembership(
     teamId: "<TEAM_ID>",
-    roles: new List<string>(),
+    roles: ["editor"],
     email: "email@example.com", // optional
     userId: "<USER_ID>", // optional
     phone: "+12065550100", // optional

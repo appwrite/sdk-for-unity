@@ -72,12 +72,12 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent", $"AppwriteUnitySDK/0.9.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.10.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.9.0"},
-                { "X-Appwrite-Response-Format", "2.3.0" }
+                { "x-sdk-version", "0.10.0"},
+                { "X-Appwrite-Response-Format", "2.5.0" }
             };
 
             _config = new Dictionary<string, string>();
@@ -393,6 +393,35 @@ namespace Appwrite
             return this;
         }
 
+        /// <summary>
+        /// Set the push endpoint
+        ///
+        /// The MQTT broker URL the Push service connects to, e.g. "mqtt://host:1883" or
+        /// "mqtts://host:8883".
+        /// </summary>
+        /// <param name="endpoint">The MQTT broker URL</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetPushEndpoint(string endpoint)
+        {
+            _config["endpointPush"] = endpoint;
+            return this;
+        }
+
+        /// <summary>
+        /// Set the push client id
+        ///
+        /// A stable client id for the Push service. The broker keys its offline-replay cursor
+        /// on this id, so pass a stable value to resume replay across restarts. Defaults to a
+        /// per-connection id when unset.
+        /// </summary>
+        /// <param name="pushClientId">The push client id</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetPushClientId(string pushClientId)
+        {
+            _config["pushClientId"] = pushClientId;
+            return this;
+        }
+
         public Dictionary<string, string> GetHeaders()
         {
             return new Dictionary<string, string>(_headers);
@@ -526,6 +555,10 @@ namespace Appwrite
 
                         form.Add(new MultipartFormFileSection(parameter.Key, fileData, inputFile.Filename, inputFile.MimeType));
                     }
+                    else if (parameter.Value is System.Collections.IDictionary)
+                    {
+                        form.Add(new MultipartFormDataSection(parameter.Key, JsonSerializer.Serialize(parameter.Value, SerializerOptions)));
+                    }
                     else if (parameter.Value is IEnumerable<object> enumerable)
                     {
                         if (parameter.Value == null) continue;
@@ -542,6 +575,7 @@ namespace Appwrite
                     }
                 }
                 request = UnityWebRequest.Post(url, form);
+                request.method = method.ToUpperInvariant();
             }
             else if (methodGet)
             {
@@ -759,6 +793,12 @@ namespace Appwrite
 
                 return (dict as T)!;
             }
+            else if (typeof(T) == typeof(string))
+            {
+                var text = request.downloadHandler.text as T;
+                request.Dispose();
+                return text!;
+            }
             else
             {
                 var result = request.downloadHandler.data as T;
@@ -788,7 +828,7 @@ namespace Appwrite
             string path,
             Dictionary<string, string> headers,
             Dictionary<string, object?> parameters,
-            Func<Dictionary<string, object>, T> converter,
+            Func<Dictionary<string, object>, T>? converter,
             string paramName,
             string? idParamName = null,
             Action<UploadProgress>? onProgress = null,
@@ -797,10 +837,21 @@ namespace Appwrite
             if (string.IsNullOrEmpty(paramName))
                 throw new ArgumentException("Parameter name cannot be null or empty", nameof(paramName));
 
-            if (!parameters.ContainsKey(paramName))
-                throw new ArgumentException($"Parameter {paramName} not found", nameof(paramName));
+            if (!parameters.TryGetValue(paramName, out var value) || value == null)
+            {
+                return await Call(
+                    method: method,
+                    path,
+                    new Dictionary<string, string>(headers)
+                    {
+                        ["Content-Type"] = "multipart/form-data"
+                    },
+                    parameters,
+                    converter
+                );
+            }
 
-            var input = parameters[paramName] as InputFile;
+            var input = value as InputFile;
             if (input == null)
                 throw new ArgumentException($"Parameter {paramName} must be an InputFile", nameof(paramName));
 
@@ -834,7 +885,7 @@ namespace Appwrite
                 var buffer = new byte[Math.Min(size, ChunkSize)];
                 var result = new Dictionary<string, object?>();
 
-                if (size < ChunkSize)
+                if (size <= ChunkSize || typeof(T) == typeof(string))
                 {
                     switch (input.SourceType)
                     {
@@ -843,6 +894,8 @@ namespace Appwrite
                             var dataStream = input.Data as Stream;
                             if (dataStream == null)
                                 throw new InvalidOperationException("Stream data is null");
+                            if (buffer.Length < size)
+                                buffer = new byte[size];
                             var bytesReadSmall = await ReadExactlyAsync(dataStream, buffer, (int)size);
                             if (bytesReadSmall != size)
                                 throw new EndOfStreamException("Unexpected end of stream during upload");
@@ -985,7 +1038,7 @@ namespace Appwrite
                 var nonNullableResult = result.Where(kvp => kvp.Value != null)
                     .ToDictionary(kvp => kvp.Key, kvp => kvp.Value!);
 
-                return converter(nonNullableResult);
+                return converter != null ? converter(nonNullableResult) : (nonNullableResult as T)!;
             }
             finally
             {

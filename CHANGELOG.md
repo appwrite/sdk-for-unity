@@ -1,5 +1,20 @@
 # Change Log
 
+## 0.10.0
+
+* Breaking: requests send `X-Appwrite-Response-Format: 2.5.0`; responses follow the 2.5 shapes
+* Breaking: missing response fields are filled with their documented defaults
+* Added: `Apps` service to manage apps, installations, keys and secrets
+* Added: `Oauth2` service for the OAuth2 authorize, token, device and grant flows
+* Added: `Push` service, exposed as `AppwriteManager.Push`, with a bundled `MQTTnet.dll`
+* Added: `Topic` helper to build topics for `Push.Subscribe`
+* Added: `Query` aggregates (`Count`, `CountDistinct`, `Sum`, `Avg`, `Min`, `Max` and more), `GroupBy`, `Having`, `Distinct`, joins, `Relationship`, `Covers`, `SpatialEquals` and `Page`
+* Added: `Query.Builder` to chain queries; `Build()` returns the query list
+* Added: `ExecutionTrigger.Email`
+* Updated: configs saved with every service selected also initialize services added since, such as `Apps` and `Oauth2`
+* Fixed: a file exactly `ChunkSize` bytes long uploads in a single request
+* Fixed: WebGL players compile again; `Push` reports `PlatformNotSupportedException` on WebGL
+
 ## 0.9.0
 
 * Added: `analytics.createEvent` in a new `Analytics` service to send tracking events

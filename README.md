@@ -22,17 +22,17 @@ Requires Unity 2021.3 or later. Installing from a git URL also requires [Git](ht
 3. Enter the following URL and click **Add** (**Install** in Unity 6):
 
 ```text
-https://github.com/appwrite/sdk-for-unity.git#0.10.0
+https://github.com/appwrite/sdk-for-unity.git#0.11.0
 ```
 
-The `#0.10.0` suffix pins the package to a release. Change it to any released tag, or omit it to track the latest commit on the default branch.
+The `#0.11.0` suffix pins the package to a release. Change it to any released tag, or omit it to track the latest commit on the default branch.
 
 You can also add the package to `Packages/manifest.json` directly:
 
 ```json
 {
   "dependencies": {
-    "io.appwrite.unity": "https://github.com/appwrite/sdk-for-unity.git#0.10.0"
+    "io.appwrite.unity": "https://github.com/appwrite/sdk-for-unity.git#0.11.0"
   }
 }
 ```
@@ -45,7 +45,9 @@ You can also add the package to `Packages/manifest.json` directly:
 
 ## OAuth on Android
 
-OAuth sign-in returns to your app through the `appwrite-callback-<PROJECT_ID>` URL scheme. Enable **Custom Main Manifest** in **Project Settings > Player > Android > Publishing Settings** and add this intent filter to the Unity activity in `Assets/Plugins/Android/AndroidManifest.xml`, replacing `<PROJECT_ID>` with your project ID:
+OAuth sign-in returns to your app through the `appwrite-callback-<PROJECT_ID>` URL scheme. When you build for Android, the package registers this scheme on the Unity activity for the project ID set on each `AppwriteConfig` asset in your project, so you do not need to edit any manifest.
+
+If you create the client in code without a `AppwriteConfig` asset, enable **Custom Main Manifest** in **Project Settings > Player > Android > Publishing Settings** and add this intent filter to the Unity activity in `Assets/Plugins/Android/AndroidManifest.xml`, replacing `<PROJECT_ID>` with your project ID:
 
 ```xml
 <intent-filter>

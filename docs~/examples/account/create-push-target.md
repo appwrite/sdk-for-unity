@@ -12,6 +12,8 @@ Account account = new Account(client);
 Target result = await account.CreatePushTarget(
     targetId: "<TARGET_ID>",
     identifier: "<IDENTIFIER>",
-    providerId: "<PROVIDER_ID>" // optional
+    providerId: "<PROVIDER_ID>", // optional
+    bundleId: "<BUNDLE_ID>", // optional
+    environment: "sandbox" // optional
 );
 ```

@@ -246,6 +246,14 @@ namespace Appwrite.Services
         /// <para>
         /// Get a list of all the user's documents in a given collection. You can use
         /// the query params to filter your results.
+        /// 
+        /// Documents returned by aggregate, groupBy or distinct queries hold only the
+        /// attributes they select, group or aggregate, typed as a document types them,
+        /// with a joined attribute named by its join alias (`alias.attribute`). They
+        /// have no `$id`, `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`,
+        /// `$databaseId` or `$collectionId` unless they select or group it, and
+        /// neither does a right or full join document that no document of this
+        /// collection matched.
         /// </para>
         /// </summary>
         [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.listRows` instead.")]
@@ -337,6 +345,60 @@ namespace Appwrite.Services
                 Models.Document.From(map: it);
 
             return _client.Call<Models.Document>(
+                method: "POST",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Get a list of all the user's documents in a given collection using a POST
+        /// request. This behaves identically to the list documents endpoint but
+        /// accepts the queries in the request body, allowing much larger `queries`
+        /// arrays than can fit in a URL query string.
+        /// 
+        /// </para>
+        /// </summary>
+        [Obsolete("This API has been deprecated since 1.8.0. Please use `TablesDB.createQuery` instead.")]
+        public UniTask<Models.DocumentList> CreateQuery(string databaseId, string collectionId, List<string>? queries = null, string? transactionId = null, bool? total = null, long? ttl = null)
+        {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            var apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/query"
+                .Replace("{databaseId}", databaseId)
+                .Replace("{collectionId}", collectionId);
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "queries", queries },
+                { "transactionId", transactionId },
+                { "total", total },
+                { "ttl", ttl }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.DocumentList Convert(Dictionary<string, object> it) =>
+                Models.DocumentList.From(map: it);
+
+            return _client.Call<Models.DocumentList>(
                 method: "POST",
                 path: apiPath,
                 headers: apiHeaders,

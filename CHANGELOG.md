@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.11.0
+
+* Added: `CreateQuery` on `Databases`, `DocumentsDB` and `TablesDB` to send list queries in the request body
+* Added: `Account.ListMemberships`
+* Added: `bundleId` and `environment` on `Account.CreatePushTarget` and `Account.UpdatePushTarget` for APNs routing
+* Fixed: Android builds register the OAuth2 callback scheme for each `AppwriteConfig` project ID
+* Fixed: removed the bundled `Plugins/Android/AndroidManifest.xml` that redeclared the launcher activity
+* Fixed: the setup window's Documentation and Discord buttons open the SDK README and Appwrite Discord
+
 ## 0.10.0
 
 * Breaking: requests send `X-Appwrite-Response-Format: 2.5.0`; responses follow the 2.5 shapes

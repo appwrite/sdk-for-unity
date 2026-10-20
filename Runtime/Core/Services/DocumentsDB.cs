@@ -389,6 +389,59 @@ namespace Appwrite.Services
 
         /// <summary>
         /// <para>
+        /// Get a list of all the user's documents in a given collection using a POST
+        /// request. This behaves identically to the list documents endpoint but
+        /// accepts the queries in the request body, allowing much larger `queries`
+        /// arrays than can fit in a URL query string.
+        /// 
+        /// </para>
+        /// </summary>
+        public UniTask<Models.DocumentList> CreateQuery(string databaseId, string collectionId, List<string>? queries = null, string? transactionId = null, bool? total = null, long? ttl = null)
+        {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (collectionId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"collectionId\"");
+            }
+
+            var apiPath = "/documentsdb/{databaseId}/collections/{collectionId}/documents/query"
+                .Replace("{databaseId}", databaseId)
+                .Replace("{collectionId}", collectionId);
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "queries", queries },
+                { "transactionId", transactionId },
+                { "total", total },
+                { "ttl", ttl }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.DocumentList Convert(Dictionary<string, object> it) =>
+                Models.DocumentList.From(map: it);
+
+            return _client.Call<Models.DocumentList>(
+                method: "POST",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
         /// Get a document by its unique ID. This endpoint response returns a JSON
         /// object with the document data.
         /// </para>

@@ -209,8 +209,8 @@ namespace Appwrite.Editor
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             EditorGUILayout.BeginHorizontal();
             var buttonStyle = new GUIStyle(GUI.skin.button) { padding = new RectOffset(15, 15, 8, 8), margin = new RectOffset(5, 5, 5, 5), fontSize = 11 };
-            if (GUILayout.Button(new GUIContent(" 📖 Documentation", "Open Appwrite documentation"), buttonStyle)) { Application.OpenURL("https://appwrite.io"); }
-            if (GUILayout.Button(new GUIContent(" 💬 Discord Community", "Join our Discord community"), buttonStyle)) { Application.OpenURL("https://discord.gg/dJ9xrMr9hq"); }
+            if (GUILayout.Button(new GUIContent(" 📖 Documentation", "Open the Appwrite SDK for Unity documentation"), buttonStyle)) { Application.OpenURL("https://github.com/appwrite/sdk-for-unity#readme"); }
+            if (GUILayout.Button(new GUIContent(" 💬 Discord Community", "Join our Discord community"), buttonStyle)) { Application.OpenURL("https://appwrite.io/discord"); }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
         }

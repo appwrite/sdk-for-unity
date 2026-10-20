@@ -11,6 +11,8 @@ Account account = new Account(client);
 
 Target result = await account.UpdatePushTarget(
     targetId: "<TARGET_ID>",
-    identifier: "<IDENTIFIER>"
+    identifier: "<IDENTIFIER>",
+    bundleId: "<BUNDLE_ID>", // optional
+    environment: "sandbox" // optional
 );
 ```

@@ -240,6 +240,13 @@ namespace Appwrite.Services
         /// <para>
         /// Get a list of all the user's rows in a given table. You can use the query
         /// params to filter your results.
+        /// 
+        /// Rows returned by aggregate, groupBy or distinct queries hold only the
+        /// columns they select, group or aggregate, typed as a row types them, with a
+        /// joined column named by its join alias (`alias.column`). They have no `$id`,
+        /// `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`, `$databaseId` or
+        /// `$tableId` unless they select or group it, and neither does a right or full
+        /// join row that no row of this table matched.
         /// </para>
         /// </summary>
         public UniTask<Models.RowList> ListRows(string databaseId, string tableId, List<string>? queries = null, string? transactionId = null, bool? total = null, long? ttl = null)
@@ -329,6 +336,59 @@ namespace Appwrite.Services
                 Models.Row.From(map: it);
 
             return _client.Call<Models.Row>(
+                method: "POST",
+                path: apiPath,
+                headers: apiHeaders,
+                parameters: apiParameters.Where(it => it.Value != null).ToDictionary(it => it.Key, it => it.Value)!,
+                convert: Convert);
+
+        }
+
+        /// <summary>
+        /// <para>
+        /// Get a list of all the user's rows in a given table using a POST request.
+        /// This behaves identically to the list rows endpoint but accepts the queries
+        /// in the request body, allowing much larger `queries` arrays than can fit in
+        /// a URL query string.
+        /// 
+        /// </para>
+        /// </summary>
+        public UniTask<Models.RowList> CreateQuery(string databaseId, string tableId, List<string>? queries = null, string? transactionId = null, bool? total = null, long? ttl = null)
+        {
+            if (databaseId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"databaseId\"");
+            }
+
+            if (tableId == "")
+            {
+                throw new AppwriteException("Missing required parameter: \"tableId\"");
+            }
+
+            var apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/query"
+                .Replace("{databaseId}", databaseId)
+                .Replace("{tableId}", tableId);
+
+            var apiParameters = new Dictionary<string, object?>()
+            {
+                { "queries", queries },
+                { "transactionId", transactionId },
+                { "total", total },
+                { "ttl", ttl }
+            };
+
+            var apiHeaders = new Dictionary<string, string>()
+            {
+                { "X-Appwrite-Project", _client.GetConfig("project") },
+                { "content-type", "application/json" },
+                { "accept", "application/json" }
+            };
+
+
+            static Models.RowList Convert(Dictionary<string, object> it) =>
+                Models.RowList.From(map: it);
+
+            return _client.Call<Models.RowList>(
                 method: "POST",
                 path: apiPath,
                 headers: apiHeaders,

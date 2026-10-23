@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.11.1
+
+* Fixed: Secure cookies are sent only over HTTPS, including when self-signed certificates are enabled
+* Fixed: skipping Secure cookies on HTTP retains them for later HTTPS requests and after persistence
+* Updated: URI-aware cookie selection; legacy host/path overloads omit Secure cookies when transport is unknown
+* Fixed: untyped JSON responses preserve date-looking strings instead of converting them to `DateTime`
+* Fixed: generated examples omit unset optional strings instead of sending empty values
+* Updated: API metadata and response-format header to `2.6.1`; service signatures and model shapes are unchanged
+
 ## 0.11.0
 
 * Added: `CreateQuery` on `Databases`, `DocumentsDB` and `TablesDB` to send list queries in the request body

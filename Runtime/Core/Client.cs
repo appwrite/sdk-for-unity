@@ -72,12 +72,12 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent", $"AppwriteUnitySDK/0.11.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.11.1 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.11.0"},
-                { "X-Appwrite-Response-Format", "2.5.0" }
+                { "x-sdk-version", "0.11.1"},
+                { "X-Appwrite-Response-Format", "2.6.1" }
             };
 
             _config = new Dictionary<string, string>();
@@ -606,7 +606,7 @@ namespace Appwrite
 
             // Add cookies
             var uri = new Uri(url);
-            var cookieHeader = _cookieContainer.GetCookieHeader(uri.Host, uri.AbsolutePath);
+            var cookieHeader = _cookieContainer.GetCookieHeader(uri);
 #if !(UNITY_WEBGL && !UNITY_EDITOR)
             if (!string.IsNullOrEmpty(cookieHeader))
             {

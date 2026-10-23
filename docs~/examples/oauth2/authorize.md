@@ -12,7 +12,7 @@ Oauth2 oauth2 = new Oauth2(client);
 Oauth2Authorize result = await oauth2.Authorize(
     client_id: "<CLIENT_ID>", // optional
     redirect_uri: "https://example.com", // optional
-    response_type: "", // optional
+    response_type: null, // optional
     scope: "<SCOPE>", // optional
     state: "<STATE>", // optional
     nonce: "<NONCE>", // optional

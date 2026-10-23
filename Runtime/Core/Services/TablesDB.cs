@@ -243,10 +243,11 @@ namespace Appwrite.Services
         /// 
         /// Rows returned by aggregate, groupBy or distinct queries hold only the
         /// columns they select, group or aggregate, typed as a row types them, with a
-        /// joined column named by its join alias (`alias.column`). They have no `$id`,
-        /// `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`, `$databaseId` or
-        /// `$tableId` unless they select or group it, and neither does a right or full
-        /// join row that no row of this table matched.
+        /// joined column named by its join alias (`alias.column`). The response omits
+        /// their `$id`, `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`,
+        /// `$databaseId` and `$tableId` unless they select or group it, and those of a
+        /// right or full join row that no row of this table matched. SDK row models
+        /// fill omitted system columns with empty values.
         /// </para>
         /// </summary>
         public UniTask<Models.RowList> ListRows(string databaseId, string tableId, List<string>? queries = null, string? transactionId = null, bool? total = null, long? ttl = null)

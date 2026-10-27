@@ -30,6 +30,26 @@ namespace Appwrite
             return _config.TryGetValue(key, out var value) ? value : "";
         }
 
+        /// <summary>
+        /// Encodes a value as one path segment. Everything but letters, digits
+        /// and -_.!~*'() is escaped, as encodeURIComponent does, so a value
+        /// fills exactly the segment it replaces.
+        /// </summary>
+        internal static string EncodePath(string? value)
+        {
+            if (value == "." || value == "..")
+            {
+                throw new AppwriteException("Path parameter cannot be \".\" or \"..\"");
+            }
+
+            return Uri.EscapeDataString(value ?? string.Empty)
+                .Replace("%21", "!")
+                .Replace("%2A", "*")
+                .Replace("%27", "'")
+                .Replace("%28", "(")
+                .Replace("%29", ")");
+        }
+
         private readonly Dictionary<string, string> _headers;
         private readonly Dictionary<string, string> _config;
         private string _endpoint;
@@ -72,12 +92,12 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent", $"AppwriteUnitySDK/0.11.1 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.12.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.11.1"},
-                { "X-Appwrite-Response-Format", "2.6.1" }
+                { "x-sdk-version", "0.12.0"},
+                { "X-Appwrite-Response-Format", "2.6.2" }
             };
 
             _config = new Dictionary<string, string>();
@@ -938,7 +958,7 @@ namespace Appwrite
                         // Make a request to check if a file already exists
                         var current = await Call<Dictionary<string, object?>>(
                             method: "GET",
-                            path: $"{path}/{parameters[idParamName!]}",
+                            path: $"{path}/{EncodePath(parameters[idParamName!]?.ToString())}",
                             new Dictionary<string, string> { { "Content-Type", "application/json" } },
                             parameters: new Dictionary<string, object?>()
                         );

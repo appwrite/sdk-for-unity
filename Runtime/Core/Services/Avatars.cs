@@ -30,7 +30,7 @@ namespace Appwrite.Services
         public UniTask<byte[]> GetBrowser(Appwrite.Enums.Browser code, long? width = null, long? height = null, long? quality = null)
         {
             var apiPath = "/avatars/browsers/{code}"
-                .Replace("{code}", code.Value);
+                .Replace("{code}", Client.EncodePath(code.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -71,7 +71,7 @@ namespace Appwrite.Services
         public UniTask<byte[]> GetCreditCard(Appwrite.Enums.CreditCard code, long? width = null, long? height = null, long? quality = null)
         {
             var apiPath = "/avatars/credit-cards/{code}"
-                .Replace("{code}", code.Value);
+                .Replace("{code}", Client.EncodePath(code.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -146,7 +146,7 @@ namespace Appwrite.Services
         public UniTask<byte[]> GetFlag(Appwrite.Enums.Flag code, long? width = null, long? height = null, long? quality = null)
         {
             var apiPath = "/avatars/flags/{code}"
-                .Replace("{code}", code.Value);
+                .Replace("{code}", Client.EncodePath(code.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {

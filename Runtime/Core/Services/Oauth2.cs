@@ -25,7 +25,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2Approve> Approve(string grantId, string? authorizationDetails = null, string? scope = null)
         {
             var apiPath = "/oauth2/{project_id}/approve"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -65,7 +65,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2Authorize> Authorize(string? clientId = null, string? redirectUri = null, string? responseType = null, string? scope = null, string? state = null, string? nonce = null, string? codeChallenge = null, string? codeChallengeMethod = null, string? prompt = null, long? maxAge = null, string? authorizationDetails = null, List<string>? resource = null, string? audience = null, string? requestUri = null)
         {
             var apiPath = "/oauth2/{project_id}/authorize"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -115,7 +115,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2Authorize> AuthorizePost(string? clientId = null, string? redirectUri = null, string? responseType = null, string? scope = null, string? state = null, string? nonce = null, string? codeChallenge = null, string? codeChallengeMethod = null, string? prompt = null, long? maxAge = null, string? authorizationDetails = null, List<string>? resource = null, string? audience = null, string? requestUri = null)
         {
             var apiPath = "/oauth2/{project_id}/authorize"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -163,7 +163,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2DeviceAuthorization> CreateDeviceAuthorization(string? clientId = null, string? scope = null, string? authorizationDetails = null, List<string>? resource = null, string? audience = null)
         {
             var apiPath = "/oauth2/{project_id}/device_authorization"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -204,7 +204,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2Grant> CreateGrant(string userCode)
         {
             var apiPath = "/oauth2/{project_id}/grants"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -245,8 +245,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/oauth2/{project_id}/grants/{grant_id}"
-                .Replace("{project_id}", _client.GetConfig("project"))
-                .Replace("{grant_id}", grantId);
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")))
+                .Replace("{grant_id}", Client.EncodePath(grantId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -281,7 +281,7 @@ namespace Appwrite.Services
         public UniTask<object> Logout(string? idTokenHint = null, string? logoutHint = null, string? clientId = null, string? postLogoutRedirectUri = null, string? state = null, string? uiLocales = null)
         {
             var apiPath = "/oauth2/{project_id}/logout"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -319,7 +319,7 @@ namespace Appwrite.Services
         public UniTask<object> LogoutPost(string? idTokenHint = null, string? logoutHint = null, string? clientId = null, string? postLogoutRedirectUri = null, string? state = null, string? uiLocales = null)
         {
             var apiPath = "/oauth2/{project_id}/logout"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -357,7 +357,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2OrganizationList> ListOrganizations(long? limit = null, long? offset = null, string? search = null)
         {
             var apiPath = "/oauth2/{project_id}/organizations"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -393,7 +393,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2PAR> CreatePAR(string clientId, string redirectUri, string responseType, string? scope = null, string? state = null, string? nonce = null, string? codeChallenge = null, string? codeChallengeMethod = null, string? prompt = null, long? maxAge = null, string? authorizationDetails = null, List<string>? resource = null, string? audience = null)
         {
             var apiPath = "/oauth2/{project_id}/par"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -441,7 +441,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2ProjectList> ListProjects(long? limit = null, long? offset = null, string? search = null)
         {
             var apiPath = "/oauth2/{project_id}/projects"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -479,7 +479,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2Reject> Reject(string grantId)
         {
             var apiPath = "/oauth2/{project_id}/reject"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -513,7 +513,7 @@ namespace Appwrite.Services
         public UniTask<object> Revoke(string token, string? tokenTypeHint = null, string? clientId = null, string? clientSecret = null)
         {
             var apiPath = "/oauth2/{project_id}/revoke"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -548,7 +548,7 @@ namespace Appwrite.Services
         public UniTask<Models.Oauth2Token> CreateToken(string grantType, string? code = null, string? refreshToken = null, string? deviceCode = null, string? clientId = null, string? clientSecret = null, string? codeVerifier = null, string? redirectUri = null, List<string>? resource = null, string? audience = null)
         {
             var apiPath = "/oauth2/{project_id}/token"
-                .Replace("{project_id}", _client.GetConfig("project"));
+                .Replace("{project_id}", Client.EncodePath(_client.GetConfig("project")));
 
             var apiParameters = new Dictionary<string, object?>()
             {

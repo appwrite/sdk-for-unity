@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.12.0
+
+* Updated: requests send `X-Appwrite-Response-Format: 2.6.2`
+* Fixed: path parameters are percent-encoded as one segment; `.` and `..` throw `AppwriteException`
+* Fixed: chunked upload resume lookups percent-encode the file ID
+* Fixed: cookie debug logs show only the cookie name, not its value
+* Updated: README explains Secure session cookies over HTTPS
+
 ## 0.11.1
 
 * Fixed: Secure cookies are sent only over HTTPS, including when self-signed certificates are enabled

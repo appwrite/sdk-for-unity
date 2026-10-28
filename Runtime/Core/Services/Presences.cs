@@ -64,7 +64,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/presences/{presenceId}"
-                .Replace("{presenceId}", presenceId);
+                .Replace("{presenceId}", Client.EncodePath(presenceId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -103,7 +103,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/presences/{presenceId}"
-                .Replace("{presenceId}", presenceId);
+                .Replace("{presenceId}", Client.EncodePath(presenceId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -148,7 +148,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/presences/{presenceId}"
-                .Replace("{presenceId}", presenceId);
+                .Replace("{presenceId}", Client.EncodePath(presenceId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -193,7 +193,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/presences/{presenceId}"
-                .Replace("{presenceId}", presenceId);
+                .Replace("{presenceId}", Client.EncodePath(presenceId));
 
             var apiParameters = new Dictionary<string, object?>()
             {

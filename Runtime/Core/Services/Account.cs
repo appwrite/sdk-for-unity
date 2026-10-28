@@ -139,7 +139,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/consents/{consentId}"
-                .Replace("{consentId}", consentId);
+                .Replace("{consentId}", Client.EncodePath(consentId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -179,7 +179,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/consents/{consentId}"
-                .Replace("{consentId}", consentId);
+                .Replace("{consentId}", Client.EncodePath(consentId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -217,7 +217,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/consents/{consentId}/tokens"
-                .Replace("{consentId}", consentId);
+                .Replace("{consentId}", Client.EncodePath(consentId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -263,8 +263,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/consents/{consentId}/tokens/{tokenId}"
-                .Replace("{consentId}", consentId)
-                .Replace("{tokenId}", tokenId);
+                .Replace("{consentId}", Client.EncodePath(consentId))
+                .Replace("{tokenId}", Client.EncodePath(tokenId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -309,8 +309,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/consents/{consentId}/tokens/{tokenId}"
-                .Replace("{consentId}", consentId)
-                .Replace("{tokenId}", tokenId);
+                .Replace("{consentId}", Client.EncodePath(consentId))
+                .Replace("{tokenId}", Client.EncodePath(tokenId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -422,7 +422,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/identities/{identityId}"
-                .Replace("{identityId}", identityId);
+                .Replace("{identityId}", Client.EncodePath(identityId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -563,7 +563,7 @@ namespace Appwrite.Services
         public UniTask<Models.MfaType> CreateMfaAuthenticator(Appwrite.Enums.AuthenticatorType type)
         {
             var apiPath = "/account/mfa/authenticators/{type}"
-                .Replace("{type}", type.Value);
+                .Replace("{type}", Client.EncodePath(type.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -600,7 +600,7 @@ namespace Appwrite.Services
         public UniTask<Models.MfaType> CreateMFAAuthenticator(Appwrite.Enums.AuthenticatorType type)
         {
             var apiPath = "/account/mfa/authenticators/{type}"
-                .Replace("{type}", type.Value);
+                .Replace("{type}", Client.EncodePath(type.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -637,7 +637,7 @@ namespace Appwrite.Services
         public UniTask<Models.User> UpdateMfaAuthenticator(Appwrite.Enums.AuthenticatorType type, string otp)
         {
             var apiPath = "/account/mfa/authenticators/{type}"
-                .Replace("{type}", type.Value);
+                .Replace("{type}", Client.EncodePath(type.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -674,7 +674,7 @@ namespace Appwrite.Services
         public UniTask<Models.User> UpdateMFAAuthenticator(Appwrite.Enums.AuthenticatorType type, string otp)
         {
             var apiPath = "/account/mfa/authenticators/{type}"
-                .Replace("{type}", type.Value);
+                .Replace("{type}", Client.EncodePath(type.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -710,7 +710,7 @@ namespace Appwrite.Services
         public UniTask<object> DeleteMfaAuthenticator(Appwrite.Enums.AuthenticatorType type)
         {
             var apiPath = "/account/mfa/authenticators/{type}"
-                .Replace("{type}", type.Value);
+                .Replace("{type}", Client.EncodePath(type.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -741,7 +741,7 @@ namespace Appwrite.Services
         public UniTask<object> DeleteMFAAuthenticator(Appwrite.Enums.AuthenticatorType type)
         {
             var apiPath = "/account/mfa/authenticators/{type}"
-                .Replace("{type}", type.Value);
+                .Replace("{type}", Client.EncodePath(type.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -1324,7 +1324,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/passkeys/{passkeyId}"
-                .Replace("{passkeyId}", passkeyId);
+                .Replace("{passkeyId}", Client.EncodePath(passkeyId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -1362,7 +1362,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/passkeys/{passkeyId}"
-                .Replace("{passkeyId}", passkeyId);
+                .Replace("{passkeyId}", Client.EncodePath(passkeyId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -1405,7 +1405,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/passkeys/{passkeyId}"
-                .Replace("{passkeyId}", passkeyId);
+                .Replace("{passkeyId}", Client.EncodePath(passkeyId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -1445,7 +1445,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/passkeys/{passkeyId}/verification"
-                .Replace("{passkeyId}", passkeyId);
+                .Replace("{passkeyId}", Client.EncodePath(passkeyId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -2102,7 +2102,7 @@ namespace Appwrite.Services
         public async UniTask CreateOAuth2Session(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             var apiPath = "/account/sessions/oauth2/{provider}"
-                .Replace("{provider}", provider.Value);
+                .Replace("{provider}", Client.EncodePath(provider.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -2249,7 +2249,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/sessions/{sessionId}"
-                .Replace("{sessionId}", sessionId);
+                .Replace("{sessionId}", Client.EncodePath(sessionId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -2289,7 +2289,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/sessions/{sessionId}"
-                .Replace("{sessionId}", sessionId);
+                .Replace("{sessionId}", Client.EncodePath(sessionId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -2332,7 +2332,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/sessions/{sessionId}"
-                .Replace("{sessionId}", sessionId);
+                .Replace("{sessionId}", Client.EncodePath(sessionId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -2452,7 +2452,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/targets/{targetId}/push"
-                .Replace("{targetId}", targetId);
+                .Replace("{targetId}", Client.EncodePath(targetId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -2496,7 +2496,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/account/targets/{targetId}/push"
-                .Replace("{targetId}", targetId);
+                .Replace("{targetId}", Client.EncodePath(targetId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -2644,7 +2644,7 @@ namespace Appwrite.Services
         public async UniTask CreateOAuth2Token(Appwrite.Enums.OAuthProvider provider, string? success = null, string? failure = null, List<string>? scopes = null, string? state = null)
         {
             var apiPath = "/account/tokens/oauth2/{provider}"
-                .Replace("{provider}", provider.Value);
+                .Replace("{provider}", Client.EncodePath(provider.Value));
 
             var apiParameters = new Dictionary<string, object?>()
             {

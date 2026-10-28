@@ -27,7 +27,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files"
-                .Replace("{bucketId}", bucketId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -85,7 +85,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files"
-                .Replace("{bucketId}", bucketId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -140,8 +140,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
-                .Replace("{bucketId}", bucketId)
-                .Replace("{fileId}", fileId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId))
+                .Replace("{fileId}", Client.EncodePath(fileId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -185,8 +185,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
-                .Replace("{bucketId}", bucketId)
-                .Replace("{fileId}", fileId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId))
+                .Replace("{fileId}", Client.EncodePath(fileId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -233,8 +233,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
-                .Replace("{bucketId}", bucketId)
-                .Replace("{fileId}", fileId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId))
+                .Replace("{fileId}", Client.EncodePath(fileId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -277,8 +277,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}/download"
-                .Replace("{bucketId}", bucketId)
-                .Replace("{fileId}", fileId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId))
+                .Replace("{fileId}", Client.EncodePath(fileId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -323,8 +323,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}/preview"
-                .Replace("{bucketId}", bucketId)
-                .Replace("{fileId}", fileId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId))
+                .Replace("{fileId}", Client.EncodePath(fileId));
 
             var apiParameters = new Dictionary<string, object?>()
             {
@@ -378,8 +378,8 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/storage/buckets/{bucketId}/files/{fileId}/view"
-                .Replace("{bucketId}", bucketId)
-                .Replace("{fileId}", fileId);
+                .Replace("{bucketId}", Client.EncodePath(bucketId))
+                .Replace("{fileId}", Client.EncodePath(fileId));
 
             var apiParameters = new Dictionary<string, object?>()
             {

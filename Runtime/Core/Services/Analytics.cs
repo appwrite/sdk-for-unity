@@ -26,7 +26,7 @@ namespace Appwrite.Services
             }
 
             var apiPath = "/analytics/properties/{propertyId}/events"
-                .Replace("{propertyId}", propertyId);
+                .Replace("{propertyId}", Client.EncodePath(propertyId));
 
             var apiParameters = new Dictionary<string, object?>()
             {

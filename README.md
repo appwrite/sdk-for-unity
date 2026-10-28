@@ -1,7 +1,7 @@
 # Appwrite Unity SDK
 
 ![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg?style=flat-square)
-![Version](https://img.shields.io/badge/api%20version-2.6.1-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/api%20version-2.6.2-blue.svg?style=flat-square)
 ![Unity](https://img.shields.io/badge/Unity-2021.3%2B-blue.svg?style=flat-square)
 [![X Account](https://img.shields.io/badge/follow-%40appwrite-000000?logo=x&style=flat-square)](https://x.com/appwrite)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
@@ -22,17 +22,17 @@ Requires Unity 2021.3 or later. Installing from a git URL also requires [Git](ht
 3. Enter the following URL and click **Add** (**Install** in Unity 6):
 
 ```text
-https://github.com/appwrite/sdk-for-unity.git#0.11.1
+https://github.com/appwrite/sdk-for-unity.git#0.12.0
 ```
 
-The `#0.11.1` suffix pins the package to a release. Change it to any released tag, or omit it to track the latest commit on the default branch.
+The `#0.12.0` suffix pins the package to a release. Change it to any released tag, or omit it to track the latest commit on the default branch.
 
 You can also add the package to `Packages/manifest.json` directly:
 
 ```json
 {
   "dependencies": {
-    "io.appwrite.unity": "https://github.com/appwrite/sdk-for-unity.git#0.11.1"
+    "io.appwrite.unity": "https://github.com/appwrite/sdk-for-unity.git#0.12.0"
   }
 }
 ```
@@ -76,6 +76,12 @@ Create a project in the [Appwrite Console](https://cloud.appwrite.io/). Find you
 If you build for WebGL, add a **Web** platform to your project with the hostname that serves your build, so Appwrite accepts requests from it.
 
 Then create an `AppwriteConfig` asset with **Appwrite > Create Configuration**, or click **Setup Current Scene** in the Setup Assistant to create the asset and add an `AppwriteManager` to the open scene. Set the endpoint (for example `https://<REGION>.cloud.appwrite.io/v1`), your project ID, and the services you want `AppwriteManager` to create.
+
+### Session cookies and HTTPS
+
+Use SDK 0.11.1 or later. Cookies marked `Secure` are sent only to HTTPS endpoints. Allowing a self-signed certificate does not allow these cookies over HTTP, regardless of the port. Use an HTTPS endpoint when authenticating with Secure session cookies.
+
+Cookies skipped for an HTTP request remain available for later HTTPS requests and after persistence. If you integrate with the cookie container directly, use its URI overloads so cookie selection can check the request scheme. The legacy host/path overloads omit Secure cookies because they do not know the transport.
 
 ### Make your first request with AppwriteManager
 

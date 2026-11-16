@@ -18,7 +18,7 @@ namespace Appwrite.Services
         /// Send a tracking event from a browser, native app, or server-side SDK.
         /// </para>
         /// </summary>
-        public UniTask<object> CreateEvent(string propertyId, string name, string url, string? domain = null, string? referrer = null, long? screenWidth = null, string? sessionHash = null, long? scrollDepth = null, long? engagementTime = null, List<string>? props = null, string? userId = null, string? ip = null, string? userAgent = null)
+        public UniTask<object> CreateEvent(string propertyId, string name, string url, string? domain = null, string? referrer = null, long? screenWidth = null, string? sessionHash = null, long? scrollDepth = null, long? engagementTime = null, List<string>? props = null, string? userId = null, string? ip = null, string? userAgent = null, bool? interactive = null)
         {
             if (propertyId == "")
             {
@@ -41,7 +41,8 @@ namespace Appwrite.Services
                 { "props", props },
                 { "userId", userId },
                 { "ip", ip },
-                { "userAgent", userAgent }
+                { "userAgent", userAgent },
+                { "interactive", interactive }
             };
 
             var apiHeaders = new Dictionary<string, string>()

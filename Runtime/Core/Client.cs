@@ -92,12 +92,12 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent", $"AppwriteUnitySDK/0.12.0 ({Environment.OSVersion.Platform}; {Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.13.0 ({System.Environment.OSVersion.Platform}; {System.Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.12.0"},
-                { "X-Appwrite-Response-Format", "2.6.2" }
+                { "x-sdk-version", "0.13.0"},
+                { "X-Appwrite-Response-Format", "2.7.2" }
             };
 
             _config = new Dictionary<string, string>();
@@ -324,6 +324,19 @@ namespace Appwrite
         public Client SetLocale(string value)
         {
             SetHeader("locale", "X-Appwrite-Locale", value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set Environment
+        ///
+        /// The ID of the project environment to act in, alongside the project ID. Used with Appwrite Cloud projects that have environments.
+        /// </summary>
+        /// <param name="value">The value to set</param>
+        /// <returns>Client instance for method chaining</returns>
+        public Client SetEnvironment(string value)
+        {
+            SetHeader("environment", "X-Appwrite-Environment", value);
             return this;
         }
 

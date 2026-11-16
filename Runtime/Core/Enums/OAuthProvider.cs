@@ -38,6 +38,7 @@ namespace Appwrite.Enums
         public static OAuthProvider Kick => new OAuthProvider("kick");
         public static OAuthProvider Linkedin => new OAuthProvider("linkedin");
         public static OAuthProvider Microsoft => new OAuthProvider("microsoft");
+        public static OAuthProvider Naver => new OAuthProvider("naver");
         public static OAuthProvider Notion => new OAuthProvider("notion");
         public static OAuthProvider Oidc => new OAuthProvider("oidc");
         public static OAuthProvider Okta => new OAuthProvider("okta");
@@ -53,6 +54,8 @@ namespace Appwrite.Enums
         public static OAuthProvider Tradeshift => new OAuthProvider("tradeshift");
         public static OAuthProvider TradeshiftBox => new OAuthProvider("tradeshiftBox");
         public static OAuthProvider Twitch => new OAuthProvider("twitch");
+        public static OAuthProvider Vipps => new OAuthProvider("vipps");
+        public static OAuthProvider VippsSandbox => new OAuthProvider("vippsSandbox");
         public static OAuthProvider Webflow => new OAuthProvider("webflow");
         public static OAuthProvider Wordpress => new OAuthProvider("wordpress");
         public static OAuthProvider X => new OAuthProvider("x");

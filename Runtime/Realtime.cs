@@ -844,6 +844,12 @@ namespace Appwrite
                 $"project={Uri.EscapeDataString(project)}"
             };
 
+            var environment = _client.Config.GetValueOrDefault("environment", "");
+            if (!string.IsNullOrEmpty(environment))
+            {
+                queryParts.Add($"environment={Uri.EscapeDataString(environment)}");
+            }
+
             var uri = new Uri(realtimeEndpoint);
 
             var basePath = uri.AbsolutePath.TrimEnd('/');

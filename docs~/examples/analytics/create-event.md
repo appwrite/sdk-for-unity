@@ -22,6 +22,7 @@ object result = await analytics.CreateEvent(
     props: new List<string>(), // optional
     userId: "<USER_ID>", // optional
     ip: "<IP>", // optional
-    userAgent: "<USER_AGENT>" // optional
+    userAgent: "<USER_AGENT>", // optional
+    interactive: false // optional
 );
 ```

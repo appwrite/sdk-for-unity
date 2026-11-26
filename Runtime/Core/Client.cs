@@ -92,11 +92,11 @@ namespace Appwrite
             _headers = new Dictionary<string, string>()
             {
                 { "content-type", "application/json" },
-                { "user-agent", $"AppwriteUnitySDK/0.13.0 ({System.Environment.OSVersion.Platform}; {System.Environment.OSVersion.VersionString})"},
+                { "user-agent", $"AppwriteUnitySDK/0.14.0 ({System.Environment.OSVersion.Platform}; {System.Environment.OSVersion.VersionString})"},
                 { "x-sdk-name", "Unity" },
                 { "x-sdk-platform", "client" },
                 { "x-sdk-language", "unity" },
-                { "x-sdk-version", "0.13.0"},
+                { "x-sdk-version", "0.14.0"},
                 { "X-Appwrite-Response-Format", "2.7.2" }
             };
 

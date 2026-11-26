@@ -22,17 +22,17 @@ Requires Unity 2021.3 or later. Installing from a git URL also requires [Git](ht
 3. Enter the following URL and click **Add** (**Install** in Unity 6):
 
 ```text
-https://github.com/appwrite/sdk-for-unity.git#0.13.0
+https://github.com/appwrite/sdk-for-unity.git#0.14.0
 ```
 
-The `#0.13.0` suffix pins the package to a release. Change it to any released tag, or omit it to track the latest commit on the default branch.
+The `#0.14.0` suffix pins the package to a release. Change it to any released tag, or omit it to track the latest commit on the default branch.
 
 You can also add the package to `Packages/manifest.json` directly:
 
 ```json
 {
   "dependencies": {
-    "io.appwrite.unity": "https://github.com/appwrite/sdk-for-unity.git#0.13.0"
+    "io.appwrite.unity": "https://github.com/appwrite/sdk-for-unity.git#0.14.0"
   }
 }
 ```

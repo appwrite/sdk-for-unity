@@ -165,6 +165,7 @@ namespace Appwrite
             { typeof(Appwrite.Services.TablesDB), (AppwriteService.TablesDB, client => new Appwrite.Services.TablesDB(client)) },
             { typeof(Appwrite.Services.Teams), (AppwriteService.Teams, client => new Appwrite.Services.Teams(client)) },
             { typeof(Appwrite.Services.VectorsDB), (AppwriteService.VectorsDB, client => new Appwrite.Services.VectorsDB(client)) },
+            { typeof(Appwrite.Services.Videos), (AppwriteService.Videos, client => new Appwrite.Services.Videos(client)) },
         };
         
         /// <summary>

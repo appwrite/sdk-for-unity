@@ -25,9 +25,10 @@ namespace Appwrite
         Analytics = 1 << 14,
         Apps = 1 << 15,
         Oauth2 = 1 << 16,
+        Videos = 1 << 17,
 
         [Tooltip("Selects all available services.")]
-        All = Account | Analytics | Apps | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Oauth2 | Organization | Presences | Storage | TablesDB | Teams | VectorsDB
+        All = Account | Analytics | Apps | Avatars | Databases | DocumentsDB | Functions | Graphql | Locale | Messaging | Oauth2 | Organization | Presences | Storage | TablesDB | Teams | VectorsDB | Videos
     }
 
     /// <summary>
